@@ -21,7 +21,7 @@ export default {
 
 	css: ["~/assets/global.scss"],
 
-	plugins: [],
+	plugins: ["~/plugins/vuex-persist.client.js"],
 
 	components: true,
 

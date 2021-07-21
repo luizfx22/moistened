@@ -6,6 +6,7 @@ module.exports = {
 	},
 	parserOptions: {
 		parser: "babel-eslint",
+		requireConfigFile: false,
 	},
 	extends: [
 		"@nuxtjs",
@@ -13,10 +14,8 @@ module.exports = {
 		"prettier/vue",
 		"plugin:prettier/recommended",
 		"plugin:nuxt/recommended",
-		"plugin:@typescript-eslint/eslint-recommended",
-		"plugin:@typescript-eslint/recommended",
 	],
-	plugins: ["@typescript-eslint", "prettier"],
+	plugins: ["prettier"],
 	rules: {
 		"prettier/prettier": "error",
 		"no-console": "off",
