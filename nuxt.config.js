@@ -6,22 +6,27 @@ export default {
 	target: "static",
 
 	head: {
-		titleTemplate: "%s - base",
-		title: "base",
+		titleTemplate: "%s",
+		title: "Moistened",
 		htmlAttrs: {
-			lang: "en",
+			lang: "pt-br",
 		},
 		meta: [
 			{ charset: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ hid: "description", name: "description", content: "" },
+			{ hid: "description", name: "description", content: "Moistened é um gerenciador de hortas" },
 		],
 		link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
 	},
 
+	layoutTransition: {
+		name: "layout-transtion__",
+		mode: "in-out",
+	},
+
 	css: ["~/assets/global.scss"],
 
-	plugins: ["~/plugins/vuex-persist.client.js"],
+	plugins: ["~/plugins/vuex-persist.client.js", "~/plugins/utils.client.js"],
 
 	components: true,
 
