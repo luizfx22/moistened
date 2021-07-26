@@ -27,36 +27,36 @@
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar fixed app>
-			<v-app-bar-nav-icon class="ml-2" @click.stop="drawer = !drawer" />
+			<v-app-bar-nav-icon class="ml-1 mr-1" @click.stop="drawer = !drawer" />
 			<v-toolbar-title>{{ $utils.capitalize($route.name) }}</v-toolbar-title>
 			<v-spacer></v-spacer>
 			<v-menu
 				transition="slide-x-transition"
 				bottom
-				min-width="200px"
-				class="mr-5"
+				min-width="250px"
+				class="mr-5 mt-5"
 				rounded
 				offset-y
 			>
 				<template #activator="{ on }">
-					<v-btn icon x-large v-on="on">
+					<v-btn icon x-large class="ml-1 mr-1" v-on="on">
 						<v-avatar color="brown" size="48">
-							<span class="white--text text-h5">JJ</span>
+							<v-img :src="user.photoURL"></v-img>
 						</v-avatar>
 					</v-btn>
 				</template>
 				<v-card>
 					<v-list-item-content class="justify-center">
 						<div class="mx-auto text-center">
-							<v-avatar color="brown">
-								<span class="white--text text-h5">JJ</span>
+							<v-avatar color="brown" size="80" class="mb-5">
+								<v-img :src="user.photoURL"></v-img>
 							</v-avatar>
-							<h3>MEU PINTO</h3>
-							<p class="text-caption mt-1">putasnaescola.com.br</p>
+							<h3>{{ user.displayName }}</h3>
+							<p class="text-caption mt-1">{{ user.email }}</p>
 							<v-divider class="my-3"></v-divider>
 							<v-btn depressed rounded text> Edit Account </v-btn>
 							<v-divider class="my-3"></v-divider>
-							<v-btn depressed rounded text> Disconnect </v-btn>
+							<v-btn depressed rounded text nuxt to="/logout"> Disconnect </v-btn>
 						</div>
 					</v-list-item-content>
 				</v-card>
@@ -72,24 +72,17 @@
 
 <script>
 export default {
+	middleware: ["auth"],
 	data() {
 		return {
 			drawer: true,
-			items: [
-				// {
-				// 	icon: "mdi-apps",
-				// 	title: "Welcome",
-				// 	to: "/",
-				// },
-				// {
-				// 	icon: "mdi-chart-bubble",
-				// 	title: "Inspire",
-				// 	to: "/",
-				// },
-			],
+			items: [],
+			user: null,
 		};
 	},
-	created() {},
+	created() {
+		this.user = this.$store.state.user;
+	},
 };
 </script>
 <style lang="scss"></style>
