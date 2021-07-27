@@ -4,6 +4,7 @@ export const state = () => ({
 		email: "",
 		displayName: "",
 		photoURL: "",
+		avatarLetter: "",
 	},
 });
 
@@ -12,6 +13,8 @@ export const mutations = {
 		try {
 			const { uid, email, displayName, photoURL } = authUser;
 			state.user = { uid, email, displayName, photoURL };
+
+			//
 		} catch (error) {}
 	},
 

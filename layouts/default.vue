@@ -41,22 +41,29 @@
 				<template #activator="{ on }">
 					<v-btn icon x-large class="ml-1 mr-1" v-on="on">
 						<v-avatar color="brown" size="48">
-							<v-img :src="user.photoURL"></v-img>
+							<v-img v-if="user.photoURL || user.photoURL !== ''" :src="user.photoURL"></v-img>
+							<span v-else>
+								{{ user.avatarLetter }}
+							</span>
 						</v-avatar>
 					</v-btn>
 				</template>
 				<v-card>
 					<v-list-item-content class="justify-center">
-						<div class="mx-auto text-center">
+						<div class="mx-auto text-center pr-5 pl-5">
 							<v-avatar color="brown" size="80" class="mb-5">
-								<v-img :src="user.photoURL"></v-img>
+								<v-img v-if="user.photoURL" :src="user.photoURL"></v-img>
+								<span v-else>
+									{{ user.avatarLetter }}
+								</span>
 							</v-avatar>
 							<h3>{{ user.displayName }}</h3>
 							<p class="text-caption mt-1">{{ user.email }}</p>
 							<v-divider class="my-3"></v-divider>
-							<v-btn depressed rounded text> Edit Account </v-btn>
-							<v-divider class="my-3"></v-divider>
-							<v-btn depressed rounded text nuxt to="/logout"> Disconnect </v-btn>
+							<v-btn depressed rounded text nuxt to="/logout">
+								<v-icon>mdi-logout</v-icon>
+								<span class="pl-1">Desconectar</span>
+							</v-btn>
 						</div>
 					</v-list-item-content>
 				</v-card>
@@ -80,8 +87,19 @@ export default {
 			user: null,
 		};
 	},
+	watch: {
+		"$store.state.user": {
+			handler(value) {
+				this.user = { ...value, avatarLetter: value.displayName[0]?.toUpperCase() };
+			},
+			deep: true,
+		},
+	},
 	created() {
-		this.user = this.$store.state.user;
+		this.user = {
+			...this.$store.state.user,
+			avatarLetter: this.$store.state?.user?.displayName[0]?.toUpperCase(),
+		};
 	},
 };
 </script>
