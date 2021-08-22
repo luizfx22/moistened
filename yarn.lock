@@ -9358,6 +9358,18 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+swrv@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/swrv/-/swrv-0.9.4.tgz#8c8d34aa321add1b821158c5b16acda91d166f59"
+  integrity sha512-1ztLWp4XAPLBAyl3jUvAoIjVcXUxEY5U/FyDyvpCcSB/9jemq6Ay3Gp+NpFBLT4DmPkNcO8aIjTfmxnSAp0r1A==
+  dependencies:
+    swrv "^1.0.0-beta.8"
+
+swrv@^1.0.0-beta.8:
+  version "1.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/swrv/-/swrv-1.0.0-beta.8.tgz#745723f5ca8a7a7e290e911cf7da34cecaf356d3"
+  integrity sha512-MsjaMOvZODfM0cess/HhbSrNbAotYinv4vzipLckKYBo/QmrvjNUPGZSRSqByXy/9AjrMRFWo0YanaVPbqADPQ==
+
 table@^6.0.9:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/table/-/table-6.7.1.tgz"

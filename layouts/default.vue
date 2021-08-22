@@ -83,7 +83,12 @@ export default {
 	data() {
 		return {
 			drawer: true,
-			items: [],
+			items: [
+				{
+					to: "/my-devices",
+					icon: "",
+				},
+			],
 			user: null,
 		};
 	},

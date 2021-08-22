@@ -12,7 +12,7 @@
 						</v-btn>
 					</v-col>
 				</v-row>
-				<v-row>
+				<!-- <v-row>
 					<v-col>
 						<v-divider></v-divider>
 					</v-col>
@@ -22,7 +22,7 @@
 					<v-col>
 						<v-divider></v-divider>
 					</v-col>
-				</v-row>
+				</v-row> -->
 				<v-row align-content="center">
 					<v-col class="d-flex justify-center">
 						<v-btn

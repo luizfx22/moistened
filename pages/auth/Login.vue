@@ -2,7 +2,8 @@
 	<v-card class="mx-auto" max-width="500" :loading="cardLoading" light>
 		<v-card-title primary-title> Moistened </v-card-title>
 		<v-card-text class="pb-0">
-			<v-form ref="loginForm" v-model="isFormValid">
+			<p>Para sua comodidade entre com sua melhor conta do Google!</p>
+			<!-- <v-form ref="loginForm" v-model="isFormValid">
 				<v-container>
 					<v-row>
 						<v-col>
@@ -50,12 +51,12 @@
 						</v-col>
 					</v-row>
 				</v-container>
-			</v-form>
+			</v-form> -->
 		</v-card-text>
-		<v-divider></v-divider>
+		<!-- <v-divider></v-divider> -->
 		<v-card-actions>
 			<v-container>
-				<v-row>
+				<!-- <v-row>
 					<v-col class="d-flex justify-center">
 						<v-btn
 							elevation="2"
@@ -78,7 +79,7 @@
 					<v-col>
 						<v-divider></v-divider>
 					</v-col>
-				</v-row>
+				</v-row> -->
 				<v-row align-content="center">
 					<v-col class="d-flex justify-center">
 						<v-btn
@@ -93,19 +94,19 @@
 						</v-btn>
 					</v-col>
 				</v-row>
-				<v-row>
+				<!-- <v-row>
 					<v-col>
 						<v-divider></v-divider>
 					</v-col>
-				</v-row>
-				<v-row>
+				</v-row> -->
+				<!-- <v-row>
 					<v-col class="d-flex justify-center">
 						<v-btn elevation="2" color="blue darken-1" dark nuxt to="/auth/register">
 							<v-icon>mdi-account-plus</v-icon>
 							<span class="pl-1">Criar uma nova conta</span>
 						</v-btn>
 					</v-col>
-				</v-row>
+				</v-row> -->
 			</v-container>
 		</v-card-actions>
 	</v-card>
