@@ -12,20 +12,32 @@
 				<v-img src="/Moistened-Icon.png"></v-img>
 			</v-avatar>
 
-			<v-spacer></v-spacer>
-			<v-tooltip bottom>
-				<template #activator="{ on: tooltip }">
-					<v-btn icon class="mr-4" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
-						<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">{{
-							darkThemeIcon
-						}}</v-icon>
+			<v-list>
+				<v-spacer></v-spacer>
+			</v-list>
+
+			<v-list dense nav style="position: fixed; bottom: 0; width: 100%">
+				<v-list-item class="pb-5">
+					<v-tooltip bottom>
+						<template #activator="{ on: tooltip }">
+							<v-btn icon class="mx-auto" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
+								<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">{{
+									darkThemeIcon
+								}}</v-icon>
+							</v-btn>
+						</template>
+						<span>
+							Alterar tema para modo
+							{{ !$vuetify.theme.dark ? "escuro" : "claro" }}
+						</span>
+					</v-tooltip>
+				</v-list-item>
+				<v-list-item>
+					<v-btn icon class="mx-auto">
+						<v-icon>mdi-cog</v-icon>
 					</v-btn>
-				</template>
-				<span>
-					Alterar tema para modo
-					{{ !$vuetify.theme.dark ? "escuro" : "claro" }}
-				</span>
-			</v-tooltip>
+				</v-list-item>
+			</v-list>
 		</v-navigation-drawer>
 
 		<v-main :id="$vuetify.theme.dark ? 'app-container-dark' : 'app-container-light'" app>
