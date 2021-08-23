@@ -1,78 +1,35 @@
 <template>
-	<v-app>
-		<v-navigation-drawer v-model="drawer" fixed absolute app src="https://picsum.photos/1920/1080">
-			<v-list class="pt-0">
-				<v-list-item style="background-color: #15151555">
-					<v-list-item-action>
-						<v-img
-							src="https://picsum.photos/200"
-							width="50"
-							height="50"
-							style="border-radius: 100%"
-						></v-img>
-					</v-list-item-action>
-					<v-list-item-content>
-						<h3>Moistened</h3>
-					</v-list-item-content>
-				</v-list-item>
-				<v-divider></v-divider>
-				<v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
-					<v-list-item-action>
-						<v-icon>{{ item.icon }}</v-icon>
-					</v-list-item-action>
-					<v-list-item-content>
-						<v-list-item-title v-text="item.title" />
-					</v-list-item-content>
-				</v-list-item>
-			</v-list>
-		</v-navigation-drawer>
-		<v-app-bar fixed app>
-			<v-app-bar-nav-icon class="ml-1 mr-1" @click.stop="drawer = !drawer" />
-			<v-toolbar-title>{{ $utils.capitalize($route.name) }}</v-toolbar-title>
+	<v-app id="app">
+		<v-navigation-drawer
+			:id="$vuetify.theme.dark ? 'app-navbar-dark' : 'app-navbar-light'"
+			permanent
+			absolute
+			mini-variant-width="106px"
+			floating
+			mini-variant
+		>
+			<v-avatar class="d-block text-center mx-auto mt-7 mb-15" size="86">
+				<v-img src="/Moistened-Icon.png"></v-img>
+			</v-avatar>
+
 			<v-spacer></v-spacer>
-			<v-menu
-				transition="slide-x-transition"
-				bottom
-				min-width="250px"
-				class="mr-5 mt-5"
-				rounded
-				offset-y
-			>
-				<template #activator="{ on }">
-					<v-btn icon x-large class="ml-1 mr-1" v-on="on">
-						<v-avatar color="brown" size="48">
-							<v-img v-if="user.photoURL || user.photoURL !== ''" :src="user.photoURL"></v-img>
-							<span v-else>
-								{{ user.avatarLetter }}
-							</span>
-						</v-avatar>
+			<v-tooltip bottom>
+				<template #activator="{ on: tooltip }">
+					<v-btn icon class="mr-4" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
+						<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">{{
+							darkThemeIcon
+						}}</v-icon>
 					</v-btn>
 				</template>
-				<v-card>
-					<v-list-item-content class="justify-center">
-						<div class="mx-auto text-center pr-5 pl-5">
-							<v-avatar color="brown" size="80" class="mb-5">
-								<v-img v-if="user.photoURL" :src="user.photoURL"></v-img>
-								<span v-else>
-									{{ user.avatarLetter }}
-								</span>
-							</v-avatar>
-							<h3>{{ user.displayName }}</h3>
-							<p class="text-caption mt-1">{{ user.email }}</p>
-							<v-divider class="my-3"></v-divider>
-							<v-btn depressed rounded text nuxt to="/logout">
-								<v-icon>mdi-logout</v-icon>
-								<span class="pl-1">Desconectar</span>
-							</v-btn>
-						</div>
-					</v-list-item-content>
-				</v-card>
-			</v-menu>
-		</v-app-bar>
-		<v-main>
-			<v-container>
-				<nuxt />
-			</v-container>
+				<span>
+					Alterar tema para modo
+					{{ !$vuetify.theme.dark ? "escuro" : "claro" }}
+				</span>
+			</v-tooltip>
+		</v-navigation-drawer>
+
+		<v-main :id="$vuetify.theme.dark ? 'app-container-dark' : 'app-container-light'" app>
+			<nuxt />
 		</v-main>
 	</v-app>
 </template>
@@ -82,6 +39,7 @@ export default {
 	middleware: ["auth"],
 	data() {
 		return {
+			darkThemeIcon: "mdi-rotate-315 mdi-moon-waning-crescent",
 			drawer: true,
 			items: [
 				{
@@ -92,20 +50,38 @@ export default {
 			user: null,
 		};
 	},
-	watch: {
-		"$store.state.user": {
-			handler(value) {
-				this.user = { ...value, avatarLetter: value.displayName[0]?.toUpperCase() };
-			},
-			deep: true,
+
+	methods: {
+		toggleDark(to) {
+			if (!to && typeof to !== "boolean") {
+				this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+			} else {
+				this.$vuetify.theme.dark = to;
+			}
+
+			if (!this.$vuetify.theme.dark) {
+				this.darkThemeIcon = "mdi-rotate-315 mdi-moon-waning-crescent";
+			} else {
+				this.darkThemeIcon = "mdi-weather-sunny";
+			}
 		},
-	},
-	created() {
-		this.user = {
-			...this.$store.state.user,
-			avatarLetter: this.$store.state?.user?.displayName[0]?.toUpperCase(),
-		};
 	},
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+#app-navbar-light {
+	background-color: lighten(whitesmoke, 2);
+}
+
+#app-container-light {
+	background-color: darken(whitesmoke, 3);
+}
+
+#app-navbar-dark {
+	background-color: #303439;
+}
+
+#app-container-dark {
+	background-color: #26292f;
+}
+</style>
