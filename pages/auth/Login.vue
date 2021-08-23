@@ -1,7 +1,12 @@
 <template>
 	<v-card class="mx-auto" max-width="500" :loading="cardLoading" light>
-		<v-card-title primary-title> Moistened </v-card-title>
+		<div class="d-flex">
+			<v-avatar size="200" tile class="ma-auto">
+				<v-img src="/Moistened.png" contain height="120"></v-img>
+			</v-avatar>
+		</div>
 		<v-card-text class="pb-0">
+			<h3>Seja bem-vindo ao Moistened!</h3>
 			<p>Para sua comodidade entre com sua melhor conta do Google!</p>
 		</v-card-text>
 		<v-card-actions>
