@@ -80,7 +80,9 @@ export default {
 		},
 	},
 
-	async created() {},
+	created() {
+		console.log(process.env.NUXT_SUPABASE_URL);
+	},
 
 	methods: {
 		async handleLoginWithEmail() {
