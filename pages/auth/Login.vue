@@ -3,83 +3,9 @@
 		<v-card-title primary-title> Moistened </v-card-title>
 		<v-card-text class="pb-0">
 			<p>Para sua comodidade entre com sua melhor conta do Google!</p>
-			<!-- <v-form ref="loginForm" v-model="isFormValid">
-				<v-container>
-					<v-row>
-						<v-col>
-							<p class="mb-2">
-								<b>E-mail</b>
-							</p>
-							<v-text-field
-								ref="emailField"
-								v-model="form.email"
-								:disabled="cardLoading"
-								:rules="rules.emailRules"
-								required
-								elevation="0"
-								solo
-								outlined
-							></v-text-field>
-						</v-col>
-					</v-row>
-					<v-row>
-						<v-col>
-							<div class="mb-2 flex-row justify-space-between" style="display: flex">
-								<p style="margin: 0">
-									<b>Senha</b>
-								</p>
-								<p style="margin: 0">
-									<b>Esqueceu sua senha?</b>
-								</p>
-							</div>
-							<v-text-field
-								ref="senhaField"
-								v-model="form.senha"
-								:disabled="cardLoading"
-								:append-icon="mostrarSenha ? 'mdi-eye' : 'mdi-eye-off'"
-								:rules="rules.passwordRules"
-								:type="mostrarSenha ? 'text' : 'password'"
-								name="input-10-1"
-								hint="Pelo menos 8 caracteres!"
-								counter
-								outlined
-								elevation="0"
-								solo
-								@click:append="mostrarSenha = !mostrarSenha"
-								@keypress.enter.native="handleLoginWithEmail"
-							></v-text-field>
-						</v-col>
-					</v-row>
-				</v-container>
-			</v-form> -->
 		</v-card-text>
-		<!-- <v-divider></v-divider> -->
 		<v-card-actions>
 			<v-container>
-				<!-- <v-row>
-					<v-col class="d-flex justify-center">
-						<v-btn
-							elevation="2"
-							color="success"
-							:loading="cardLoading"
-							@click="handleLoginWithEmail"
-						>
-							<v-icon>mdi-login</v-icon>
-							<span class="pl-1">Acessar sistema</span>
-						</v-btn>
-					</v-col>
-				</v-row>
-				<v-row>
-					<v-col>
-						<v-divider></v-divider>
-					</v-col>
-					<v-col cols="1" class="ma-0 pa-0 d-flex justify-center">
-						<span style="font-size: 14px; margin-top: 2px">OU</span>
-					</v-col>
-					<v-col>
-						<v-divider></v-divider>
-					</v-col>
-				</v-row> -->
 				<v-row align-content="center">
 					<v-col class="d-flex justify-center">
 						<v-btn
@@ -153,6 +79,9 @@ export default {
 			};
 		},
 	},
+
+	async created() {},
+
 	methods: {
 		async handleLoginWithEmail() {
 			this.$refs.loginForm.validate();
@@ -197,17 +126,21 @@ export default {
 
 		async handleLoginWithGoogle() {
 			try {
-				const provider = new this.$fireModule.auth.GoogleAuthProvider();
-
 				this.googleLoading = true;
-				const { user } = await this.$fire.auth.signInWithPopup(provider); // It's automatically saved
+				const { user, session, error } = await this.$supabase.auth.signIn({
+					provider: "google",
+				});
 
-				if (!user?.uid) {
-					this.googleLoading = false;
-					throw new Error("An error occurred while trying to login!");
-				}
+				console.log(user);
+				console.log(session);
+				console.log(error);
 
-				this.$router.push("/dashboard");
+				// if (!user?.uid) {
+				// 	this.googleLoading = false;
+				// 	throw new Error("An error occurred while trying to login!");
+				// }
+
+				// this.$router.push("/dashboard");
 
 				//
 			} catch (error) {

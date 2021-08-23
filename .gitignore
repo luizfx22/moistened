@@ -90,3 +90,6 @@ sw.*
 *.swp
 
 .vercel
+
+# Supabase
+.supabase

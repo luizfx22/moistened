@@ -36,29 +36,16 @@ export default {
 
 	buildModules: ["@nuxtjs/eslint-module", "@nuxtjs/vuetify"],
 
-	modules: ["@nuxtjs/axios", "@nuxtjs/firebase"],
-
-	firebase: {
-		config: {
-			apiKey: "AIzaSyC98nDjp7jYXYTMwUGtHA-YUoLLcZXPY_o",
-			authDomain: "moistened-d6474.firebaseapp.com",
-			projectId: "moistened-d6474",
-			storageBucket: "moistened-d6474.appspot.com",
-			messagingSenderId: "1080727215809",
-			appId: "1:1080727215809:web:0aa288b7263503bc53fe40",
-		},
-		services: {
-			auth: {
-				persistence: "local", // default
-				initialize: {
-					onAuthStateChangedMutation: "ON_AUTH_STATE_CHANGED_MUTATION",
-					onAuthStateChangedAction: "onAuthStateChangedAction",
-					subscribeManually: false,
-				},
-				ssr: false,
+	modules: [
+		"@nuxtjs/axios",
+		[
+			"nuxt-supabase",
+			{
+				supabaseUrl: process.env.NUXT_SUPABASE_URL,
+				supabaseKey: process.env.NUXT_SUPABASE_ANON,
 			},
-		},
-	},
+		],
+	],
 
 	axios: {},
 
