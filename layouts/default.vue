@@ -3,7 +3,7 @@
 		<v-navigation-drawer
 			:id="$vuetify.theme.dark ? 'app-navbar-dark' : 'app-navbar-light'"
 			permanent
-			absolute
+			fixed
 			mini-variant-width="106px"
 			floating
 			mini-variant
