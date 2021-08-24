@@ -54,11 +54,7 @@ export default {
 
 	css: ["~/assets/global.scss"],
 
-	plugins: [
-		"~/plugins/vuex-persist.client.js",
-		"~/plugins/utils.client.js",
-		"~/plugins/element-ui.client.js",
-	],
+	plugins: ["~/plugins/utils.client.js"],
 
 	components: true,
 

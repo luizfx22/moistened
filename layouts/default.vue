@@ -32,7 +32,7 @@
 						</span>
 					</v-tooltip>
 				</v-list-item>
-				<v-list-item>
+				<v-list-item class="pb-5">
 					<v-btn icon class="mx-auto">
 						<v-icon>mdi-cog</v-icon>
 					</v-btn>
