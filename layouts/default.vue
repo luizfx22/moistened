@@ -13,6 +13,11 @@
 			</v-avatar>
 
 			<v-list>
+				<v-list-item class="mx-auto">
+					<v-btn x-large text icon color="primary">
+						<v-icon>mdi-chart-box-outline</v-icon>
+					</v-btn>
+				</v-list-item>
 				<v-spacer></v-spacer>
 			</v-list>
 
@@ -21,9 +26,9 @@
 					<v-tooltip bottom>
 						<template #activator="{ on: tooltip }">
 							<v-btn icon class="mx-auto" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
-								<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">{{
-									darkThemeIcon
-								}}</v-icon>
+								<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">
+									{{ darkThemeIcon }}
+								</v-icon>
 							</v-btn>
 						</template>
 						<span>
@@ -47,6 +52,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
 	middleware: ["auth"],
 	data() {
@@ -63,13 +70,49 @@ export default {
 		};
 	},
 
+	computed: {
+		isSystemOnDark() {
+			return window.matchMedia("(prefers-color-scheme: dark)").matches;
+		},
+
+		...mapGetters({
+			clientDefinedSettings: "settings/clientDefinedSettings",
+		}),
+	},
+
+	beforeMount() {
+		this.themeManager();
+	},
+
 	methods: {
+		themeManager() {
+			if (
+				typeof this.clientDefinedSettings?.preferDarkTheme === "boolean" &&
+				!this.clientDefinedSettings?.preferDarkTheme
+			)
+				return this.toggleDark(false);
+			if (this.clientDefinedSettings?.preferDarkTheme) {
+				return this.toggleDark(true);
+			}
+			if (
+				this.isSystemOnDark &&
+				!this.clientDefinedSettings?.preferDarkTheme &&
+				typeof this.clientDefinedSettings?.preferDarkTheme !== "boolean"
+			) {
+				this.toggleDark(true);
+				this.darkThemeIcon = "mdi-weather-sunny";
+			}
+		},
+
 		toggleDark(to) {
 			if (!to && typeof to !== "boolean") {
 				this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
 			} else {
 				this.$vuetify.theme.dark = to;
 			}
+
+			if (this.clientDefinedSettings?.preferDarkTheme !== this.$vuetify.theme.dark)
+				this.$store.commit("settings/toggleDarkThemePreference", this.$vuetify.theme.dark);
 
 			if (!this.$vuetify.theme.dark) {
 				this.darkThemeIcon = "mdi-rotate-315 mdi-moon-waning-crescent";

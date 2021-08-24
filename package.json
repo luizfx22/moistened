@@ -20,7 +20,8 @@
 		"morgan": "^1.10.0",
 		"nuxt": "^2.14.12",
 		"nuxt-supabase": "^2.0.0",
-		"vue-supabase": "^2.1.0-beta3"
+		"vue-supabase": "^2.1.0-beta3",
+		"vuex-persistedstate": "^4.0.0"
 	},
 	"devDependencies": {
 		"@nuxtjs/eslint-config": "^5.0.0",

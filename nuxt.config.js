@@ -54,7 +54,7 @@ export default {
 
 	css: ["~/assets/global.scss"],
 
-	plugins: ["~/plugins/utils.client.js"],
+	plugins: ["~/plugins/utils.client.js", "~/plugins/vuex-persistedstate.client.js"],
 
 	components: true,
 
