@@ -8,6 +8,14 @@ html {
 	overflow-y: auto !important;
 }
 
+[data-color-scheme="dark"] {
+	color-scheme: dark;
+}
+
+[data-color-scheme="light"] {
+	color-scheme: light;
+}
+
 #app {
 	text-rendering: optimizeLegibility;
 }

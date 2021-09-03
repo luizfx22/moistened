@@ -1,7 +1,6 @@
 <template>
 	<v-app id="app">
 		<v-navigation-drawer
-			:id="$vuetify.theme.dark ? 'app-navbar-dark' : 'app-navbar-light'"
 			permanent
 			fixed
 			mini-variant-width="106px"
@@ -119,24 +118,9 @@ export default {
 			} else {
 				this.darkThemeIcon = "mdi-weather-sunny";
 			}
+
+			document.documentElement.setAttribute("data-color-scheme", this.$vuetify.theme.dark ? "dark" : "light");
 		},
 	},
 };
 </script>
-<style lang="scss">
-#app-navbar-light {
-	background-color: lighten(whitesmoke, 2);
-}
-
-#app-container-light {
-	background-color: darken(whitesmoke, 3);
-}
-
-#app-navbar-dark {
-	background-color: #303439;
-}
-
-#app-container-dark {
-	background-color: #26292f;
-}
-</style>
