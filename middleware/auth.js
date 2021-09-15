@@ -1,5 +1,5 @@
-export default function ({ app }) {
-	console.log(app)
+export default function (context) {
+	console.log(context)
 	return true;
 	// if (!app.$fire.auth.currentUser) {
 	// 	return window.onNuxtReady(() => {
