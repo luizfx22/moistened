@@ -1,15 +1,13 @@
 <template>
 	<v-app id="app">
-		<v-app-bar flat app>
-			<div>
-				<v-avatar size="40">
-					<v-img
-						src="/Moistened-Icon-V2.png"
-						:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
-					></v-img>
-				</v-avatar>
-				<span class="font-weight-bold">Moistened</span>
-			</div>
+		<v-toolbar flat>
+			<v-avatar size="40">
+				<v-img
+					src="/Moistened-Icon-V2.png"
+					:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
+				></v-img>
+			</v-avatar>
+			<span class="font-weight-bold d-none d-sm-flex ml-5"> Moistened </span>
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
 				<template #activator="{ on: tooltip }">
@@ -29,8 +27,8 @@
 			</v-btn>
 			<div class="mst-divider"></div>
 			<v-avatar color="primary" size="40"></v-avatar>
-			<span class="font-weight-bold ml-2">Luiz A.</span>
-		</v-app-bar>
+			<span class="font-weight-bold ml-2 d-none d-sm-flex">Luiz A.</span>
+		</v-toolbar>
 	</v-app>
 </template>
 
