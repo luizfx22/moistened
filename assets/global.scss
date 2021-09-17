@@ -44,7 +44,7 @@ html {
 .mst-divider {
 	height: 34px;
 	background: #dddddd;
-	width: 3px;
+	width: 2px;
 	margin-right: 16px;
 	margin-left: 16px;
 	border-radius: 23%;
@@ -54,6 +54,6 @@ html {
 	filter: brightness(0);
 }
 
-.mst-image-white {
-	filter: brightness(0) invert(1);
-}
+// .mst-image-white {
+// 	filter: brightness(0) invert(1);
+// }

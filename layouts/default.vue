@@ -1,11 +1,11 @@
 <template>
 	<v-app id="app">
-		<v-toolbar flat app>
+		<v-app-bar flat app>
 			<div>
 				<v-avatar size="40">
 					<v-img
-						src="/Moistened-Icon.png"
-						:class="$vuetify.theme.dark ? 'mst-image-white' : 'mst-image-black'"
+						src="/Moistened-Icon-V2.png"
+						:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
 					></v-img>
 				</v-avatar>
 				<span class="font-weight-bold">Moistened</span>
@@ -30,7 +30,7 @@
 			<div class="mst-divider"></div>
 			<v-avatar color="primary" size="40"></v-avatar>
 			<span class="font-weight-bold ml-2">Luiz A.</span>
-		</v-toolbar>
+		</v-app-bar>
 	</v-app>
 </template>
 
