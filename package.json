@@ -3,9 +3,8 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "yarn supabase-dev && nuxt",
+		"dev": "nuxt",
 		"build": "nuxt build && nuxt generate",
-		"supabase-dev": "supabase start",
 		"lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
 		"lint": "yarn lint:js",
 		"emulator": "cd ./firebase && firebase emulators:start"
