@@ -1,52 +1,36 @@
 <template>
 	<v-app id="app">
-		<v-navigation-drawer
-			permanent
-			fixed
-			mini-variant-width="106px"
-			floating
-			mini-variant
-		>
-			<v-avatar class="d-block text-center mx-auto mt-7 mb-15" size="86">
-				<v-img src="/Moistened-Icon.png"></v-img>
-			</v-avatar>
-
-			<v-list>
-				<v-list-item class="mx-auto">
-					<v-btn x-large text icon color="primary">
-						<v-icon>mdi-chart-box-outline</v-icon>
+		<v-toolbar flat app>
+			<div>
+				<v-avatar size="40">
+					<v-img
+						src="/Moistened-Icon.png"
+						:class="$vuetify.theme.dark ? 'mst-image-white' : 'mst-image-black'"
+					></v-img>
+				</v-avatar>
+				<span class="font-weight-bold">Moistened</span>
+			</div>
+			<v-spacer></v-spacer>
+			<v-tooltip bottom>
+				<template #activator="{ on: tooltip }">
+					<v-btn icon small class="ml-3" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
+						<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">
+							{{ darkThemeIcon }}
+						</v-icon>
 					</v-btn>
-				</v-list-item>
-				<v-spacer></v-spacer>
-			</v-list>
-
-			<v-list dense nav style="position: fixed; bottom: 0; width: 100%">
-				<v-list-item class="pb-5">
-					<v-tooltip bottom>
-						<template #activator="{ on: tooltip }">
-							<v-btn icon class="mx-auto" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
-								<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">
-									{{ darkThemeIcon }}
-								</v-icon>
-							</v-btn>
-						</template>
-						<span>
-							Alterar tema para modo
-							{{ !$vuetify.theme.dark ? "escuro" : "claro" }}
-						</span>
-					</v-tooltip>
-				</v-list-item>
-				<v-list-item class="pb-5">
-					<v-btn icon class="mx-auto">
-						<v-icon>mdi-cog</v-icon>
-					</v-btn>
-				</v-list-item>
-			</v-list>
-		</v-navigation-drawer>
-
-		<v-main :id="$vuetify.theme.dark ? 'app-container-dark' : 'app-container-light'" app>
-			<nuxt />
-		</v-main>
+				</template>
+				<span>
+					Alterar tema para modo
+					{{ !$vuetify.theme.dark ? "escuro" : "claro" }}
+				</span>
+			</v-tooltip>
+			<v-btn icon small class="ml-2">
+				<v-icon> mdi-bell-outline </v-icon>
+			</v-btn>
+			<div class="mst-divider"></div>
+			<v-avatar color="primary" size="40"></v-avatar>
+			<span class="font-weight-bold ml-2">Luiz A.</span>
+		</v-toolbar>
 	</v-app>
 </template>
 
@@ -119,7 +103,10 @@ export default {
 				this.darkThemeIcon = "mdi-weather-sunny";
 			}
 
-			document.documentElement.setAttribute("data-color-scheme", this.$vuetify.theme.dark ? "dark" : "light");
+			document.documentElement.setAttribute(
+				"data-color-scheme",
+				this.$vuetify.theme.dark ? "dark" : "light"
+			);
 		},
 	},
 };

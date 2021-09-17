@@ -40,3 +40,20 @@ html {
 .layout-transtion__-leave-active {
 	opacity: 0;
 }
+
+.mst-divider {
+	height: 34px;
+	background: #dddddd;
+	width: 3px;
+	margin-right: 16px;
+	margin-left: 16px;
+	border-radius: 23%;
+}
+
+.mst-image-black {
+	filter: brightness(0);
+}
+
+.mst-image-white {
+	filter: brightness(0) invert(1);
+}
