@@ -1,6 +1,6 @@
 <template>
 	<v-app id="app" class="d-flex">
-		<v-toolbar flat style="background: transparent">
+		<v-app-bar flat :style="`background: ${$vuetify.theme.dark ? '#111827' : 'whitesmoke'}`" app>
 			<v-avatar size="40">
 				<v-img
 					src="/Moistened-Icon-V2.png"
@@ -30,49 +30,43 @@
 				<v-img :src="userAvatar"></v-img>
 			</v-avatar>
 			<span class="font-weight-bold ml-2 d-none d-sm-flex"> {{ userName }} </span>
-		</v-toolbar>
+		</v-app-bar>
 
-		<v-container fluid>
-			<v-row class="fill-height">
-				<v-col cols="12" md="1" lg="1" xl="1">
-					<v-navigation-drawer
-						fixed
-						permanent
-						mini-variant
-						mini-variant-width="56"
-						style="background: transparent; margin-left: 7px; top: 64px"
-					>
-						<v-list nav dense>
-							<v-list-item link>
-								<v-list-item-icon>
-									<v-icon>mdi-folder</v-icon>
-								</v-list-item-icon>
-								<v-list-item-title>My Files</v-list-item-title>
-							</v-list-item>
-							<v-list-item link>
-								<v-list-item-icon>
-									<v-icon>mdi-account-multiple</v-icon>
-								</v-list-item-icon>
-								<v-list-item-title>Shared with me</v-list-item-title>
-							</v-list-item>
-							<v-list-item link>
-								<v-list-item-icon>
-									<v-icon>mdi-star</v-icon>
-								</v-list-item-icon>
-								<v-list-item-title>Starred</v-list-item-title>
-							</v-list-item>
-						</v-list>
-					</v-navigation-drawer>
-				</v-col>
-				<v-col>
-					<v-container class="pt-0 pl-0 pr-3">
-						<v-main>
-							<nuxt></nuxt>
-						</v-main>
-					</v-container>
-				</v-col>
-			</v-row>
-		</v-container>
+		<v-navigation-drawer
+			v-model="sidebar"
+			:permanent="$mq === 'lg'"
+			fixed
+			mini-variant
+			mini-variant-width="73"
+			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: 64px`"
+		>
+			<v-list nav dense>
+				<v-list-item link>
+					<v-list-item-icon>
+						<v-icon>mdi-folder</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title>My Files</v-list-item-title>
+				</v-list-item>
+				<v-list-item link>
+					<v-list-item-icon>
+						<v-icon>mdi-account-multiple</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title>Shared with me</v-list-item-title>
+				</v-list-item>
+				<v-list-item link>
+					<v-list-item-icon>
+						<v-icon>mdi-star</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title>Starred</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
+
+		<v-main>
+			<v-container>
+				<nuxt></nuxt>
+			</v-container>
+		</v-main>
 	</v-app>
 </template>
 
@@ -88,6 +82,13 @@ export default {
 	},
 
 	computed: {
+		sidebar: {
+			get() {
+				return this.$mq === "lg";
+			},
+			set() {},
+		},
+
 		isSystemOnDark() {
 			return window.matchMedia("(prefers-color-scheme: dark)").matches;
 		},
@@ -159,21 +160,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .split {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .left {
-  background-color: teal;
-  overflow-y: scroll; /* it works! */
+	background-color: teal;
+	overflow-y: scroll; /* it works! */
 }
 
 .right {
-  flex: 1;
-  background-color: orange;
-  overflow-y: scroll; /* it works! */
+	flex: 1;
+	background-color: orange;
+	overflow-y: scroll; /* it works! */
 }
 </style>

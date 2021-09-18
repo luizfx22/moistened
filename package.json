@@ -19,6 +19,7 @@
 		"morgan": "^1.10.0",
 		"nuxt": "^2.14.12",
 		"nuxt-supabase": "^2.0.0",
+		"vue-mq": "^1.0.1",
 		"vue-supabase": "^2.1.0-beta3",
 		"vuex-persistedstate": "^4.0.0"
 	},
