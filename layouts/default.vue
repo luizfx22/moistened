@@ -60,6 +60,15 @@
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
+
+		<v-layout column wrap justify-center align-center>
+			<v-card>
+				<v-card-text>
+					<p>Hello</p>
+				</v-card-text>
+			</v-card>
+		</v-layout>
+
 	</v-app>
 </template>
 
