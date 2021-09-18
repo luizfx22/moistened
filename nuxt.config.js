@@ -58,10 +58,11 @@ export default {
 
 	components: true,
 
-	buildModules: ["@nuxtjs/eslint-module", "@nuxtjs/vuetify"],
+	buildModules: ["@nuxtjs/eslint-module"],
 
 	modules: [
 		"@nuxtjs/axios",
+		"@nuxtjs/vuetify",
 		[
 			"nuxt-supabase",
 			{
@@ -77,20 +78,27 @@ export default {
 		customVariables: ["~/assets/variables.scss"],
 		treeShake: true,
 		theme: {
-			dark: false,
+			options: {
+				customProperties: true,
+			},
 			themes: {
 				dark: {
-					primary: colors.blue.darken2,
-					accent: colors.grey.darken3,
-					secondary: colors.amber.darken3,
-					info: colors.teal.lighten1,
+					primary: colors.orange.darken3,
+					accent: colors.grey.lighten2,
+					secondary: colors.amber.lighten2,
+					info: colors.teal.lighten2,
 					warning: colors.amber.base,
 					error: colors.deepOrange.accent4,
-					success: colors.green.accent3,
+					success: colors.lightGreen.darken2,
 				},
 			},
 		},
 	},
 
-	build: {},
+	build: {
+		analyze: false,
+		babel: {
+			plugins: [["@babel/plugin-proposal-private-property-in-object", { loose: true }]],
+		},
+	},
 };

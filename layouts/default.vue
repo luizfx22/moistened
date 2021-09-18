@@ -1,6 +1,6 @@
 <template>
 	<v-app id="app">
-		<v-toolbar flat>
+		<v-toolbar flat style="background: transparent">
 			<v-avatar size="40">
 				<v-img
 					src="/Moistened-Icon-V2.png"
@@ -29,6 +29,51 @@
 			<v-avatar color="primary" size="40"></v-avatar>
 			<span class="font-weight-bold ml-2 d-none d-sm-flex">Luiz A.</span>
 		</v-toolbar>
+
+		<v-navigation-drawer
+			permanent
+			mini-variant
+			mini-variant-width="56"
+			style="background: transparent; margin-left: 7px"
+		>
+			<v-list nav dense>
+				<v-list-item link>
+					<v-list-item-icon>
+						<v-icon>mdi-folder</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title>My Files</v-list-item-title>
+				</v-list-item>
+				<v-list-item link>
+					<v-list-item-icon>
+						<v-icon>mdi-account-multiple</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title>Shared with me</v-list-item-title>
+				</v-list-item>
+				<v-list-item link>
+					<v-list-item-icon>
+						<v-icon>mdi-star</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title>Starred</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
+		<!--
+		<v-navigation-drawer
+
+		>
+			<v-list flat>
+				<v-list-item class="px-3">
+					<v-btn icon>
+						<v-icon>mdi-circle-slice-2</v-icon>
+					</v-btn>
+				</v-list-item>
+				<v-list-item class="px-3">
+					<v-btn icon>
+						<v-icon>mdi-circle-slice-2</v-icon>
+					</v-btn>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer> -->
 	</v-app>
 </template>
 
@@ -40,14 +85,6 @@ export default {
 	data() {
 		return {
 			darkThemeIcon: "mdi-rotate-315 mdi-moon-waning-crescent",
-			drawer: true,
-			items: [
-				{
-					to: "/my-devices",
-					icon: "",
-				},
-			],
-			user: null,
 		};
 	},
 
