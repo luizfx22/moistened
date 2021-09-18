@@ -32,43 +32,47 @@
 			<span class="font-weight-bold ml-2 d-none d-sm-flex"> {{ userName }} </span>
 		</v-toolbar>
 
-		<v-navigation-drawer
-			fixed
-			permanent
-			mini-variant
-			mini-variant-width="56"
-			style="background: transparent; margin-left: 7px; top: 64px"
-		>
-			<v-list nav dense>
-				<v-list-item link>
-					<v-list-item-icon>
-						<v-icon>mdi-folder</v-icon>
-					</v-list-item-icon>
-					<v-list-item-title>My Files</v-list-item-title>
-				</v-list-item>
-				<v-list-item link>
-					<v-list-item-icon>
-						<v-icon>mdi-account-multiple</v-icon>
-					</v-list-item-icon>
-					<v-list-item-title>Shared with me</v-list-item-title>
-				</v-list-item>
-				<v-list-item link>
-					<v-list-item-icon>
-						<v-icon>mdi-star</v-icon>
-					</v-list-item-icon>
-					<v-list-item-title>Starred</v-list-item-title>
-				</v-list-item>
-			</v-list>
-		</v-navigation-drawer>
-
-		<v-layout column wrap justify-center align-center>
-			<v-card>
-				<v-card-text>
-					<p>Hello</p>
-				</v-card-text>
-			</v-card>
-		</v-layout>
-
+		<v-content>
+			<v-container class="fill-height ma-0 pa-0" fluid>
+				<v-layout class="split">
+          			<section class="left">
+						<v-navigation-drawer
+							fixed
+							permanent
+							mini-variant
+							mini-variant-width="56"
+							style="background: transparent; margin-left: 7px; top: 64px"
+						>
+							<v-list nav dense>
+								<v-list-item link>
+									<v-list-item-icon>
+										<v-icon>mdi-folder</v-icon>
+									</v-list-item-icon>
+									<v-list-item-title>My Files</v-list-item-title>
+								</v-list-item>
+								<v-list-item link>
+									<v-list-item-icon>
+										<v-icon>mdi-account-multiple</v-icon>
+									</v-list-item-icon>
+									<v-list-item-title>Shared with me</v-list-item-title>
+								</v-list-item>
+								<v-list-item link>
+									<v-list-item-icon>
+										<v-icon>mdi-star</v-icon>
+									</v-list-item-icon>
+									<v-list-item-title>Starred</v-list-item-title>
+								</v-list-item>
+							</v-list>
+						</v-navigation-drawer>
+					</section>
+					<section class="right">
+						<v-main>
+							<nuxt></nuxt>
+						</v-main>
+					</section>
+				</v-layout>
+			</v-container>
+		</v-content>
 	</v-app>
 </template>
 
@@ -153,3 +157,23 @@ export default {
 	},
 };
 </script>
+<style lang="scss" scoped>
+.split {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.left {
+  background-color: teal;
+  overflow-y: scroll; /* it works! */
+}
+
+.right {
+  flex: 1;
+  background-color: orange;
+  overflow-y: scroll; /* it works! */
+}
+</style>
