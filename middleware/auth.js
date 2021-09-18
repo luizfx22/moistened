@@ -1,9 +1,9 @@
-export default function ({ app }) {
-	console.log(app);
+export default function ({ app, redirect }) {
+	if (!app.$supabase.auth?.currentUser) {
+		return window.onNuxtReady(() => {
+			window.$nuxt.$router.push("/auth/login");
+		});
+	}
+
 	return true;
-	// if (!app.$fire.auth.currentUser) {
-	// 	return window.onNuxtReady(() => {
-	// 		window.$nuxt.$router.push("/auth/login");
-	// 	});
-	// }
 }

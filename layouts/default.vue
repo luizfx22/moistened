@@ -1,5 +1,5 @@
 <template>
-	<v-app id="app">
+	<v-app id="app" class="d-flex">
 		<v-toolbar flat style="background: transparent">
 			<v-avatar size="40">
 				<v-img
@@ -26,8 +26,12 @@
 				<v-icon> mdi-bell-outline </v-icon>
 			</v-btn>
 			<div class="mst-divider"></div>
-			<v-avatar color="primary" size="40"></v-avatar>
-			<span class="font-weight-bold ml-2 d-none d-sm-flex">Luiz A.</span>
+			<v-avatar color="primary" size="40">
+				<v-img :src="user.user_metadata.avatar_url"></v-img>
+			</v-avatar>
+			<span class="font-weight-bold ml-2 d-none d-sm-flex">
+				{{ user.user_metadata.full_name.split(" ")[0] }}
+			</span>
 		</v-toolbar>
 
 		<v-navigation-drawer
@@ -57,23 +61,6 @@
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
-		<!--
-		<v-navigation-drawer
-
-		>
-			<v-list flat>
-				<v-list-item class="px-3">
-					<v-btn icon>
-						<v-icon>mdi-circle-slice-2</v-icon>
-					</v-btn>
-				</v-list-item>
-				<v-list-item class="px-3">
-					<v-btn icon>
-						<v-icon>mdi-circle-slice-2</v-icon>
-					</v-btn>
-				</v-list-item>
-			</v-list>
-		</v-navigation-drawer> -->
 	</v-app>
 </template>
 
@@ -91,6 +78,10 @@ export default {
 	computed: {
 		isSystemOnDark() {
 			return window.matchMedia("(prefers-color-scheme: dark)").matches;
+		},
+
+		user() {
+			return this.$supabase?.auth?.currentUser || "";
 		},
 
 		...mapGetters({
