@@ -27,18 +27,17 @@
 			</v-btn>
 			<div class="mst-divider"></div>
 			<v-avatar color="primary" size="40">
-				<v-img :src="user.user_metadata.avatar_url"></v-img>
+				<v-img :src="userAvatar"></v-img>
 			</v-avatar>
-			<span class="font-weight-bold ml-2 d-none d-sm-flex">
-				{{ user.user_metadata.full_name.split(" ")[0] }}
-			</span>
+			<span class="font-weight-bold ml-2 d-none d-sm-flex"> {{ userName }} </span>
 		</v-toolbar>
 
 		<v-navigation-drawer
+			fixed
 			permanent
 			mini-variant
 			mini-variant-width="56"
-			style="background: transparent; margin-left: 7px"
+			style="background: transparent; margin-left: 7px; top: 64px"
 		>
 			<v-list nav dense>
 				<v-list-item link>
@@ -82,6 +81,14 @@ export default {
 
 		user() {
 			return this.$supabase?.auth?.currentUser || "";
+		},
+
+		userAvatar() {
+			return this.user?.user_metadata?.avatar_url || "";
+		},
+
+		userName() {
+			return this.user?.user_metadata?.full_name?.split(" ")[0] || "User";
 		},
 
 		...mapGetters({
