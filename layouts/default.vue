@@ -3,7 +3,7 @@
 		<v-toolbar flat style="background: transparent">
 			<v-avatar size="40">
 				<v-img
-					src="/Moistened-Icon-V2.png"
+					src="/Moistened-Icon.png"
 					:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
 				></v-img>
 			</v-avatar>
