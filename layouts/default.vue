@@ -25,11 +25,11 @@
 			<v-btn icon small class="ml-2">
 				<v-icon> mdi-bell-outline </v-icon>
 			</v-btn>
-			<div class="mst-divider"></div>
+			<!-- <div class="mst-divider"></div> -->
 			<v-avatar color="primary" size="40">
 				<v-img :src="userAvatar"></v-img>
 			</v-avatar>
-			<span class="font-weight-bold ml-2 d-none d-sm-flex"> {{ userName }} </span>
+			<!-- <span class="font-weight-bold ml-2 d-none d-sm-flex"> {{ userName }} </span> -->
 		</v-app-bar>
 
 		<v-navigation-drawer
