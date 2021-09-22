@@ -38,7 +38,7 @@
 			fixed
 			mini-variant
 			mini-variant-width="73"
-			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${$mq === 'lg' ? '' : '64px'}`"
+			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${$mq === 'lg' ? '0px' : '64px'}`"
 		>
 			<v-list nav dense>
 				<v-list-item>
