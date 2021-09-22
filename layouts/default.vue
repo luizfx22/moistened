@@ -11,7 +11,7 @@
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
 				<template #activator="{ on: tooltip }">
-					<v-btn icon small class="ml-3" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
+					<v-btn icon small class="ml-2" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
 						<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">
 							{{ darkThemeIcon }}
 						</v-icon>
@@ -22,7 +22,7 @@
 					{{ !$vuetify.theme.dark ? "escuro" : "claro" }}
 				</span>
 			</v-tooltip>
-			<v-btn icon small class="ml-2">
+			<v-btn icon small class="ml-2 mr-2">
 				<v-icon> mdi-bell-outline </v-icon>
 			</v-btn>
 			<!-- <div class="mst-divider"></div> -->
@@ -38,17 +38,18 @@
 			fixed
 			mini-variant
 			mini-variant-width="73"
-			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${$mq === 'lg' ? '0px' : '64px'}`"
+			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${$mq === 'lg' ? '64px' : '0px'}`"
 		>
 			<v-list nav dense>
 				<v-list-item>
-					<v-list-item-avatar>
+					<v-list-item-avatar v-if="$mq !== 'lg'">
 						<v-img
 							src="/Moistened-Icon-V2.png"
 							:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
 						></v-img>
 					</v-list-item-avatar>
 				</v-list-item>
+				<v-divider></v-divider>
 				<v-list-item link>
 					<v-list-item-icon>
 						<v-icon>mdi-folder</v-icon>
