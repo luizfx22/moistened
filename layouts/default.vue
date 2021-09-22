@@ -49,7 +49,7 @@
 						></v-img>
 					</v-list-item-avatar>
 				</v-list-item>
-				<v-divider></v-divider>
+				<v-divider v-if="$mq !== 'lg'"></v-divider>
 				<v-list-item link class="mt-2">
 					<v-list-item-icon>
 						<v-icon>mdi-folder</v-icon>
