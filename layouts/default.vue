@@ -38,9 +38,17 @@
 			fixed
 			mini-variant
 			mini-variant-width="73"
-			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: 64px`"
+			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${$mq === 'lg' ? '' : '64px'}`"
 		>
 			<v-list nav dense>
+				<v-list-item>
+					<v-list-item-avatar>
+						<v-img
+							src="/Moistened-Icon-V2.png"
+							:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
+						></v-img>
+					</v-list-item-avatar>
+				</v-list-item>
 				<v-list-item link>
 					<v-list-item-icon>
 						<v-icon>mdi-folder</v-icon>
