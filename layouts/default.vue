@@ -1,7 +1,9 @@
 <template>
 	<v-app id="app" class="d-flex">
 		<v-app-bar flat :style="`background: ${$vuetify.theme.dark ? '#111827' : 'whitesmoke'}`" app>
-			<v-avatar size="40">
+			<v-app-bar-nav-icon v-if="$mq !== 'lg'" class="ml-1" @click="sidebar = true">
+			</v-app-bar-nav-icon>
+			<v-avatar v-if="$mq === 'lg'" size="40" @click="sidebar = true">
 				<v-img
 					src="/Moistened-Icon-V2.png"
 					:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
@@ -38,7 +40,9 @@
 			fixed
 			mini-variant
 			mini-variant-width="73"
-			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${$mq === 'lg' ? '64px' : '0px'}`"
+			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${
+				$mq === 'lg' ? '64px' : '0px'
+			}`"
 		>
 			<v-list nav dense>
 				<v-list-item class="mb-0">
@@ -86,16 +90,20 @@ export default {
 	middleware: ["auth"],
 	data() {
 		return {
+			// Flags
 			darkThemeIcon: "mdi-rotate-315 mdi-moon-waning-crescent",
+			drawer: false,
 		};
 	},
 
 	computed: {
 		sidebar: {
 			get() {
-				return this.$mq === "lg";
+				return this.$mq === "lg" || this.drawer;
 			},
-			set() {},
+			set(val) {
+				this.drawer = val;
+			},
 		},
 
 		isSystemOnDark() {
