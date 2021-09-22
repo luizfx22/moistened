@@ -41,8 +41,8 @@
 			:style="`background: ${$mq === 'lg' ? 'transparent' : ''}; top: ${$mq === 'lg' ? '64px' : '0px'}`"
 		>
 			<v-list nav dense>
-				<v-list-item>
-					<v-list-item-avatar v-if="$mq !== 'lg'">
+				<v-list-item class="mb-0">
+					<v-list-item-avatar v-if="$mq !== 'lg'" class="my-0 mb-2">
 						<v-img
 							src="/Moistened-Icon-V2.png"
 							:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
@@ -50,7 +50,7 @@
 					</v-list-item-avatar>
 				</v-list-item>
 				<v-divider></v-divider>
-				<v-list-item link>
+				<v-list-item link class="mt-2">
 					<v-list-item-icon>
 						<v-icon>mdi-folder</v-icon>
 					</v-list-item-icon>
