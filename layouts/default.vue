@@ -1,7 +1,7 @@
 <template>
 	<v-app id="app" class="d-flex">
 		<v-app-bar flat :style="`background: ${$vuetify.theme.dark ? '#111827' : 'whitesmoke'}`" app>
-			<v-app-bar-nav-icon v-if="$mq !== 'lg'" class="ml-1" @click="sidebar = true">
+			<v-app-bar-nav-icon v-if="$mq !== 'lg'" class="ml-0" @click="sidebar = true">
 			</v-app-bar-nav-icon>
 			<v-avatar v-if="$mq === 'lg'" size="40" @click="sidebar = true">
 				<v-img
@@ -45,8 +45,8 @@
 			}`"
 		>
 			<v-list nav dense>
-				<v-list-item class="mb-0">
-					<v-list-item-avatar v-if="$mq !== 'lg'" class="my-0 mb-2">
+				<v-list-item v-if="$mq !== 'lg'" class="mb-0">
+					<v-list-item-avatar class="my-0 mb-2">
 						<v-img
 							src="/Moistened-Icon-V2.png"
 							:class="!$vuetify.theme.dark ? 'mst-image-black' : ''"
