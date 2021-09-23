@@ -86,7 +86,7 @@ export default {
 	},
 
 	created() {
-		const session = await this.$supabase.auth.session();
+		const session = this.$supabase.auth.session();
 		if (session) {
 			return this.$router.push("/");
 		}
