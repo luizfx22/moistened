@@ -85,7 +85,12 @@ export default {
 		},
 	},
 
-	created() {},
+	created() {
+		const session = await this.$supabase.auth.session();
+		if (session) {
+			return this.$router.push("/");
+		}
+	},
 
 	methods: {
 		async handleLoginWithEmail() {
