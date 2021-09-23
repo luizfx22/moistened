@@ -54,7 +54,8 @@
 					
 					<v-divider class="my-3"></v-divider>
 					<v-btn
-						@click="$supabase.auth.signOut()"
+						nuxt
+						to="/logout"
 						depressed
 						rounded
 						text
