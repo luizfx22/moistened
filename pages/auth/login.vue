@@ -86,10 +86,18 @@ export default {
 	},
 
 	created() {
+		this.cardLoading = true;
+		this.googleLoading = true;
+
 		const session = this.$supabase.auth.session();
 		if (session) {
+			this.cardLoading = false;
+			this.googleLoading = false;
 			return this.$router.push("/");
 		}
+
+		this.cardLoading = false;
+		this.googleLoading = false;
 	},
 
 	methods: {
