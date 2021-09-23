@@ -28,9 +28,44 @@
 				<v-icon> mdi-bell-outline </v-icon>
 			</v-btn>
 			<!-- <div class="mst-divider"></div> -->
-			<v-avatar color="primary" size="40">
-				<v-img :src="userAvatar"></v-img>
-			</v-avatar>
+			<v-menu
+				bottom
+				min-width="200px"
+				rounded
+				offset-y
+			>
+				<template v-slot:activator="{ on }">
+				<v-btn
+					icon
+					x-large
+					v-on="on"
+				>
+					<v-avatar size="40">
+						<v-img :src="userAvatar"></v-img>
+					</v-avatar>
+				</v-btn>
+				</template>
+				<v-card>
+				<v-list-item-content class="justify-center">
+					<div class="mx-auto text-center">
+					<v-avatar size="40">
+						<v-img :src="userAvatar"></v-img>
+					</v-avatar>
+					
+					<v-divider class="my-3"></v-divider>
+					<v-btn
+						@click="$supabase.auth.signOut()"
+						depressed
+						rounded
+						text
+					>
+						Disconnect
+					</v-btn>
+					</div>
+				</v-list-item-content>
+				</v-card>
+			</v-menu>
+			
 			<!-- <span class="font-weight-bold ml-2 d-none d-sm-flex"> {{ userName }} </span> -->
 		</v-app-bar>
 
@@ -87,7 +122,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-	middleware: ["auth"],
+	middleware: "auth",
 	data() {
 		return {
 			// Flags
