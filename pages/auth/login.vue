@@ -147,18 +147,9 @@ export default {
 				this.googleLoading = true;
 				const { user, session, error } = await this.$supabase.auth.signIn({
 					provider: "google",
+				}, {
+					redirectTo: 'https://moistened.luizg.dev/dashboard'
 				});
-
-				console.log(user);
-				console.log(session);
-				console.log(error);
-
-				// if (!user?.uid) {
-				// 	this.googleLoading = false;
-				// 	throw new Error("An error occurred while trying to login!");
-				// }
-
-				// this.$router.push("/dashboard");
 
 				//
 			} catch (error) {
