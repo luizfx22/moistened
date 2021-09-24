@@ -58,6 +58,31 @@ html {
 	background: transparent !important;
 }
 
+// FAB Animations
+.fab-rotate {
+	.p45 {
+		animation: rotate45 0.2s ease;
+		transform: rotateZ(0deg);
+
+		@keyframes rotate45 {
+			0% {
+				transform: rotateZ(-45deg);
+			}
+		}
+	}
+
+	.m45 {
+		animation: rotate45 0.2s ease;
+		transform: rotateZ(-45deg);
+
+		@keyframes rotate45 {
+			0% {
+				transform: rotateZ(0deg);
+			}
+		}
+	}
+}
+
 // .mst-image-white {
 // 	filter: brightness(0) invert(1);
 // }
