@@ -3,7 +3,7 @@ export default async function ({ app, redirect }) {
 
 	const { data, error } = app.$supabase
 		.from("UsuariosGrupo")
-		.select()
+		.select("*")
 		.eq("usuario_id", session.user.id);
 
 	console.log(data, error);
