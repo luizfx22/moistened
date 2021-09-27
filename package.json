@@ -11,14 +11,15 @@
 	},
 	"dependencies": {
 		"@nuxtjs/axios": "^5.12.5",
+		"@supabase/supabase-js": "^1.22.4",
 		"body-parser": "^1.19.0",
 		"core-js": "^3.8.3",
 		"express": "^4.17.1",
-		"firebase": "^8.7.1",
 		"helmet": "^4.6.0",
 		"morgan": "^1.10.0",
 		"nuxt": "^2.14.12",
 		"nuxt-supabase": "^2.0.0",
+		"supabase": "^0.5.0",
 		"vue-mq": "^1.0.1",
 		"vue-supabase": "^2.1.0-beta3",
 		"vuex-persistedstate": "^4.0.0"
