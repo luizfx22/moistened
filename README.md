@@ -1,20 +1,15 @@
-# base
+# Moistened
+O _Moistened_ é um projeto de conclusão do curso de Análise e Desenvolvimento de Sistemas do IFSP Campus Catanduva, com o objetivo principal de permitir a visualização e gerenciamento da irrigação de hortas de todos os tamanhos.
 
-## Build Setup
+## Objetivos
+- [x] Visualizar a umidade atual do solo;
+- [x] Visualizar a umidade do solo em um período determinado;
+- [x] Irrigar remotamente;
 
-```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## O quê está pronto atualmente?
+- [x] Autenticação;
+- [ ] Vincular módulo do solo;
+- [ ] Vincular módulo principal;
+- [ ] Permitir acesso de mais pessoas ao sistema;
+- [ ] Exibir os dados;
+- [ ] Ativar/Desativar irrigação manualmente;
