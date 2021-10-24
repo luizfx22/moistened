@@ -5,8 +5,8 @@ export default {
 			{
 				...form,
 				proprietario_id: this.$supabase.auth.user(),
-				createdBy: this.$supabase.auth.user(),
-				updatedBy: this.$supabase.auth.user(),
+				created_by: this.$supabase.auth.user(),
+				updated_by: this.$supabase.auth.user(),
 			},
 		]);
 		console.log(data, error);
