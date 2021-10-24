@@ -25,6 +25,8 @@
 		"vuex-persistedstate": "^4.0.0"
 	},
 	"devDependencies": {
+		"@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
+		"@mdi/font": "^6.3.95",
 		"@nuxtjs/eslint-config": "^5.0.0",
 		"@nuxtjs/eslint-module": "^3.0.2",
 		"@nuxtjs/vuetify": "^1.11.3",
@@ -39,14 +41,17 @@
 		"eslint-plugin-nuxt": "^2.0.0",
 		"eslint-plugin-prettier": "^3.3.1",
 		"eslint-plugin-vue": "^7.5.0",
+		"leaflet": "^1.7.1",
 		"prettier": "^2.2.1",
 		"sass": "1.32.13",
 		"supabase": "^0.5.0",
 		"swrv": "^0.9.4",
 		"typescript": "^4.3.5",
+		"v-mask": "^2.3.0",
 		"vue": "^2.6.4",
 		"vue-chartjs": "^3.5.1",
 		"vue-template-compiler": "^2.6.10",
+		"vue2-leaflet": "^2.7.1",
 		"vuex": "^3.6.2",
 		"webpack": "^4.46.0",
 		"yup": "^0.32.9"

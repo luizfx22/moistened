@@ -16,6 +16,49 @@
 				</moistened-chart>
 			</v-col>
 		</v-row>
+
+		<v-speed-dial
+			v-model="bottomMenu"
+			class="fab-rotate"
+			bottom
+			right
+			direction="top"
+			fixed
+			transition="slide-y-reverse-transition"
+		>
+			<template #activator>
+				<v-btn
+					v-model="bottomMenu"
+					:class="bottomMenu ? 'p45' : 'm45'"
+					color="primary"
+					bottom
+					right
+					dark
+					fab
+				>
+					<v-icon> mdi-close </v-icon>
+				</v-btn>
+			</template>
+
+			<v-tooltip left>
+				<template #activator="{ on, attrs }">
+					<v-btn
+						v-bind="attrs"
+						fab
+						dark
+						small
+						color="green"
+						v-on="on"
+						@click="$refs.dialogNovaHorta.open"
+					>
+						<v-icon>mdi-store-plus</v-icon>
+					</v-btn>
+				</template>
+				<span>Nova horta</span>
+			</v-tooltip>
+		</v-speed-dial>
+
+		<dialogs-nova-horta ref="dialogNovaHorta"></dialogs-nova-horta>
 	</div>
 </template>
 
@@ -24,6 +67,8 @@ export default {
 	name: "Dashboard",
 	data() {
 		return {
+			bottomMenu: false,
+
 			fuckery: {
 				labels: ["00:00", "05:00", "10:00", "15:00", "20:00", "00:00"],
 				datasets: [

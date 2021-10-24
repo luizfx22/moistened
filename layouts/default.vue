@@ -27,46 +27,30 @@
 			<v-btn icon small class="ml-2 mr-2">
 				<v-icon> mdi-bell-outline </v-icon>
 			</v-btn>
+
 			<!-- <div class="mst-divider"></div> -->
-			<v-menu
-				bottom
-				min-width="200px"
-				rounded
-				offset-y
-			>
-				<template v-slot:activator="{ on }">
-				<v-btn
-					icon
-					x-large
-					v-on="on"
-				>
-					<v-avatar size="40">
-						<v-img :src="userAvatar"></v-img>
-					</v-avatar>
-				</v-btn>
+			<v-menu bottom min-width="200px" rounded offset-y>
+				<template #activator="{ on }">
+					<v-btn icon x-large v-on="on">
+						<v-avatar size="40">
+							<v-img :src="userAvatar"></v-img>
+						</v-avatar>
+					</v-btn>
 				</template>
 				<v-card>
-				<v-list-item-content class="justify-center">
-					<div class="mx-auto text-center">
-					<v-avatar size="40">
-						<v-img :src="userAvatar"></v-img>
-					</v-avatar>
-					
-					<v-divider class="my-3"></v-divider>
-					<v-btn
-						nuxt
-						to="/logout"
-						depressed
-						rounded
-						text
-					>
-						Disconnect
-					</v-btn>
-					</div>
-				</v-list-item-content>
+					<v-list-item-content class="justify-center">
+						<div class="mx-auto text-center">
+							<v-avatar size="40">
+								<v-img :src="userAvatar"></v-img>
+							</v-avatar>
+
+							<v-divider class="my-3"></v-divider>
+							<v-btn nuxt to="/logout" depressed rounded text> Disconnect </v-btn>
+						</div>
+					</v-list-item-content>
 				</v-card>
 			</v-menu>
-			
+
 			<!-- <span class="font-weight-bold ml-2 d-none d-sm-flex"> {{ userName }} </span> -->
 		</v-app-bar>
 
@@ -90,13 +74,32 @@
 					</v-list-item-avatar>
 				</v-list-item>
 				<v-divider v-if="$mq !== 'lg'"></v-divider>
-				<v-list-item link class="mt-2">
-					<v-list-item-icon>
-						<v-icon>mdi-folder</v-icon>
-					</v-list-item-icon>
-					<v-list-item-title>My Files</v-list-item-title>
-				</v-list-item>
-				<v-list-item link>
+
+				<v-tooltip right>
+					<template #activator="{ on, attrs }">
+						<v-list-item link class="mt-2" v-bind="attrs" nuxt to="/" v-on="on">
+							<v-list-item-icon>
+								<v-icon>mdi-home</v-icon>
+							</v-list-item-icon>
+							<v-list-item-title>Página inicial</v-list-item-title>
+						</v-list-item>
+					</template>
+					<span>Página inicial</span>
+				</v-tooltip>
+
+				<v-tooltip right>
+					<template #activator="{ on, attrs }">
+						<v-list-item link class="mt-2" v-bind="attrs" v-on="on">
+							<v-list-item-icon>
+								<v-icon>mdi-store-outline</v-icon>
+							</v-list-item-icon>
+							<v-list-item-title>Minhas hortas</v-list-item-title>
+						</v-list-item>
+					</template>
+					<span>Minhas hortas</span>
+				</v-tooltip>
+
+				<!-- <v-list-item link>
 					<v-list-item-icon>
 						<v-icon>mdi-account-multiple</v-icon>
 					</v-list-item-icon>
@@ -107,7 +110,7 @@
 						<v-icon>mdi-star</v-icon>
 					</v-list-item-icon>
 					<v-list-item-title>Starred</v-list-item-title>
-				</v-list-item>
+				</v-list-item> -->
 			</v-list>
 		</v-navigation-drawer>
 

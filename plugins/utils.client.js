@@ -1,9 +1,15 @@
 import Vue from "vue";
+import VueMask from "v-mask";
 
+// Bibliotecas externas
+Vue.use(VueMask);
+
+// Parâmetros customisados
 const strongPassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/;
 const mediumPassword =
 	/((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
 
+// Funções
 Vue.prototype.$utils = {
 	/**
 	 * Essa função capitaliza a string
