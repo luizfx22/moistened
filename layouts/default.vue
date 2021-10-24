@@ -203,7 +203,7 @@ export default {
 
 	methods: {
 		// Horta
-		setHortaAtual(horta) {
+		trocaHortaContexto(horta) {
 			this.setHortaAtual(horta);
 		},
 
