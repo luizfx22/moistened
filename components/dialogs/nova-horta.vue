@@ -105,7 +105,7 @@
 				<v-btn color="red" text :disabled="loading" @click="dialog = false">
 					<v-icon class="mr-2">mdi-close</v-icon> Cancelar
 				</v-btn>
-				<v-btn color="green darken-1" :loading="loading" @click="salvar">
+				<v-btn color="green darken-1" :loading="loading" dark @click="salvar">
 					<v-icon class="mr-2">mdi-check</v-icon> Salvar
 				</v-btn>
 			</v-card-actions>
@@ -120,7 +120,7 @@ const capitalize = ([initial, ...rest]) => [initial.toUpperCase(), ...rest].join
 export default {
 	data() {
 		return {
-			dialog: true,
+			dialog: false,
 			loading: false,
 			loadingCep: false,
 
