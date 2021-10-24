@@ -10,10 +10,24 @@
 				></v-img>
 			</v-avatar>
 			<span class="font-weight-bold d-none d-sm-flex ml-5"> Moistened </span>
+
 			<v-spacer></v-spacer>
+
+			<v-menu rounded="lg">
+				<template #activator="{ attrs, on }">
+					<v-btn text v-bind="attrs" v-on="on"> {{ hortaDisplay }} </v-btn>
+				</template>
+
+				<!-- <v-list>
+					<v-list-item v-for="item in items" :key="item" link>
+						<v-list-item-title v-text="item"></v-list-item-title>
+					</v-list-item>
+				</v-list> -->
+			</v-menu>
+
 			<v-tooltip bottom>
 				<template #activator="{ on: tooltip }">
-					<v-btn icon small class="ml-2" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
+					<v-btn icon small class="ml-2 mr-2" @click="toggleDark(undefined)" v-on="{ ...tooltip }">
 						<v-icon :color="$vuetify.theme.dark ? 'amber darken-1' : 'indigo darken-4'">
 							{{ darkThemeIcon }}
 						</v-icon>
@@ -24,9 +38,10 @@
 					{{ !$vuetify.theme.dark ? "escuro" : "claro" }}
 				</span>
 			</v-tooltip>
-			<v-btn icon small class="ml-2 mr-2">
+
+			<!-- <v-btn icon small class="ml-2 mr-2">
 				<v-icon> mdi-bell-outline </v-icon>
-			</v-btn>
+			</v-btn> -->
 
 			<!-- <div class="mst-divider"></div> -->
 			<v-menu bottom min-width="200px" rounded offset-y>
@@ -119,11 +134,13 @@
 				<nuxt></nuxt>
 			</v-container>
 		</v-main>
+
+		<m-snackbar></m-snackbar>
 	</v-app>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
 	middleware: "auth",
@@ -161,9 +178,18 @@ export default {
 			return this.user?.user_metadata?.full_name?.split(" ")[0] || "User";
 		},
 
+		hortaDisplay() {
+			return this.clientDefinedSettings?.hortaAtual || "Selecionar horta";
+		},
+
 		...mapGetters({
 			clientDefinedSettings: "settings/clientDefinedSettings",
+			hortasDisponiveis: "horta/hortas",
 		}),
+	},
+
+	created() {
+		this.getHortas();
 	},
 
 	beforeMount() {
@@ -211,6 +237,10 @@ export default {
 				this.$vuetify.theme.dark ? "dark" : "light"
 			);
 		},
+
+		...mapActions({
+			getHortas: "horta/getHortas",
+		}),
 	},
 };
 </script>

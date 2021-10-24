@@ -1,1 +1,5 @@
-export default {};
+export default {
+	hortas(state) {
+		return state.hortas;
+	},
+};

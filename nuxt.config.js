@@ -52,13 +52,14 @@ export default {
 		mode: "in-out",
 	},
 
-	css: ["~/assets/global.scss", "leaflet/dist/leaflet.css"],
+	css: ["~/assets/global.scss", "~/assets/helpers.scss", "leaflet/dist/leaflet.css"],
 
 	plugins: [
 		"~/plugins/utils.client.js",
 		"~/plugins/vuex-persistedstate.client.js",
 		"~/plugins/vue-mq.client.js",
 		"~/plugins/vue2-leaflet.client.js",
+		"~/plugins/components/m-snackbar.client.js",
 	],
 
 	components: true,

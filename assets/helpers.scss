@@ -1,0 +1,36 @@
+.justify-space-evenly {
+	justify-content: space-evenly !important;
+}
+
+// Font size helper
+@for $i from 1 through 150 {
+	.size-sq-#{$i} {
+		width: #{$i}px !important;
+		height: #{$i}px !important;
+	}
+
+	.font-size-#{$i} {
+		font-size: #{$i}px !important;
+	}
+
+	.text-#{$i}rem {
+		font-size: #{$i}rem !important;
+	}
+}
+
+// Row && Column gap for flex and grid
+@for $i from 1 through 500 {
+	.gap-#{$i} {
+		gap: #{$i}px !important;
+	}
+
+	.column-gap#{$i},
+	.c-gap#{$i} {
+		column-gap: #{$i}px !important;
+	}
+
+	.row-gap#{$i},
+	.r-gap#{$i} {
+		row-gap: #{$i}rem !important;
+	}
+}

@@ -209,6 +209,7 @@ export default {
 
 			this.loading = true;
 			this.gravarHorta({ ...this.form }).then((res) => {
+				this.dialog = false;
 				this.loading = false;
 			});
 		},
