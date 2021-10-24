@@ -13,16 +13,21 @@
 
 			<v-spacer></v-spacer>
 
-			<v-menu rounded="lg">
+			<v-menu rounded="lg" offset-y>
 				<template #activator="{ attrs, on }">
 					<v-btn text v-bind="attrs" v-on="on"> {{ hortaDisplay }} </v-btn>
 				</template>
 
-				<!-- <v-list>
-					<v-list-item v-for="item in items" :key="item" link>
-						<v-list-item-title v-text="item"></v-list-item-title>
+				<v-list>
+					<v-list-item
+						v-for="(i, o) in hortasDisponiveis"
+						:key="o"
+						class="mt-2"
+						@click="trocaHortaContexto(i)"
+					>
+						<v-list-item-title>{{ i.descricao }}</v-list-item-title>
 					</v-list-item>
-				</v-list> -->
+				</v-list>
 			</v-menu>
 
 			<v-tooltip bottom>
@@ -140,7 +145,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
 	middleware: "auth",
@@ -197,6 +202,12 @@ export default {
 	},
 
 	methods: {
+		// Horta
+		setHortaAtual(horta) {
+			this.setHortaAtual(horta);
+		},
+
+		// theme
 		themeManager() {
 			if (
 				typeof this.clientDefinedSettings?.preferDarkTheme === "boolean" &&
@@ -238,8 +249,13 @@ export default {
 			);
 		},
 
+		// Store
 		...mapActions({
 			getHortas: "horta/getHortas",
+		}),
+
+		...mapMutations({
+			setHortaAtual: "settings/clientDefinedSettings/setHortaAtual",
 		}),
 	},
 };
