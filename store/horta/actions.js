@@ -4,9 +4,9 @@ export default {
 		const { data, error } = await this.$supabase.from("Horta").insert([
 			{
 				...form,
-				proprietario_id: this.$supabase.auth.user(),
-				created_by: this.$supabase.auth.user(),
-				updated_by: this.$supabase.auth.user(),
+				proprietario_id: this.$supabase.auth.user()?.id,
+				created_by: this.$supabase.auth.user()?.id,
+				updated_by: this.$supabase.auth.user()?.id,
 			},
 		]);
 		console.log(data, error);
