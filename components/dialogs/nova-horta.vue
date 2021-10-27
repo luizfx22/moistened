@@ -137,13 +137,6 @@ export default {
 					cep: "",
 				},
 			},
-
-			map: {
-				attribution:
-					'&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-
-				zoom: 3.5,
-			},
 		};
 	},
 
@@ -169,6 +162,11 @@ export default {
 	},
 
 	watch: {
+		"form.descricao"(val) {
+			if (!val) return;
+			this.form.descricao = capitalize(val);
+		},
+
 		"form.localizacao.cep"(val) {
 			if (!val || val.length < 9) return;
 			const cep = val.replace(/\D/g, "");

@@ -143,13 +143,21 @@ export default {
 		},
 
 		async handleLoginWithGoogle() {
+			const isDev = window.location.href.includes("localhost");
+			const redirectTo = isDev
+				? "http://localhost:3000/dashboard"
+				: "https://moistened.luizg.dev/dashboard";
+
 			try {
 				this.googleLoading = true;
-				const { user, session, error } = await this.$supabase.auth.signIn({
-					provider: "google",
-				}, {
-					redirectTo: 'https://moistened.luizg.dev/dashboard'
-				});
+				await this.$supabase.auth.signIn(
+					{
+						provider: "google",
+					},
+					{
+						redirectTo,
+					}
+				);
 
 				//
 			} catch (error) {

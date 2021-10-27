@@ -3,7 +3,10 @@ export default {
 		const { data, error } = await this.$supabase
 			.from("Horta")
 			.select("*")
-			.eq("proprietario_id", this.$supabase.auth.user()?.id);
+			.eq(
+				"proprietario_id",
+				this.$supabase.auth.user()?.id || "95c51428-9666-42e9-8f38-05840b8d756e"
+			);
 
 		if (error) {
 			console.error(error);

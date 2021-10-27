@@ -19,12 +19,7 @@
 				</template>
 
 				<v-list>
-					<v-list-item
-						v-for="(i, o) in hortasDisponiveis"
-						:key="o"
-						class="mt-2"
-						@click="trocaHortaContexto(i)"
-					>
+					<v-list-item v-for="(i, o) in hortasDisponiveis" :key="o" @click="trocaHortaContexto(i)">
 						<v-list-item-title>{{ i.descricao }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
@@ -184,7 +179,7 @@ export default {
 		},
 
 		hortaDisplay() {
-			return this.clientDefinedSettings?.hortaAtual || "Selecionar horta";
+			return this.clientDefinedSettings?.hortaAtual?.descricao || "Selecionar horta";
 		},
 
 		...mapGetters({
@@ -255,7 +250,7 @@ export default {
 		}),
 
 		...mapMutations({
-			setHortaAtual: "settings/clientDefinedSettings/setHortaAtual",
+			setHortaAtual: "settings/setHortaAtual",
 		}),
 	},
 };
