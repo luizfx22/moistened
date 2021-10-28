@@ -210,48 +210,56 @@ export default {
   },
 
   mounted() {
-    const today = DateTime.fromJSDate(new Date()).toUTC();
-    const firstDateOfThisWeek = today.startOf("week");
-    const lastDateOfThisWeek = today.endOf("week");
-
-    this.getLeituras(this.hortaAtual.id).then((dados) => {
-      const leituras = dados.map((sens) => sens.Leitura);
-      const dadosFinal = _.flattenDeep(leituras).filter((leitura) => {
-        const readedAt = DateTime.fromISO(leitura.readed_at);
-        return (
-          readedAt >= firstDateOfThisWeek && readedAt <= lastDateOfThisWeek
-        );
-      });
-
-      const result = [];
-
-      for (const dayOfWeek in this.leituraSemanal.headers) {
-        let count = 0; // Total que será adicionaro ao array `result`
-        let amount = 0; // Contagem da quantidade de dados para cálculo da média
-
-        for (const leitura of dadosFinal) {
-          const datesDayOfWeek =
-            DateTime.fromISO(leitura.readed_at).weekday - 1;
-          if (datesDayOfWeek !== dayOfWeek) continue;
-
-          count += leitura.soil_humidity;
-          amount++;
-        }
-
-        if (amount === 0 || count === 0) {
-          result.push(0);
-          continue;
-        }
-
-        const mean = count / amount;
-        result.push(mean.toFixed(1));
+    this.$store.subscribe((mutation) => {
+      if (mutation.type === "settings/setHortaAtual") {
+        this.getDadosDaSemana();
       }
-
-      this.leituraSemanal.dados = [...result];
     });
   },
 
   methods: {
+    getDadosDaSemana() {
+      const today = DateTime.fromJSDate(new Date()).toUTC();
+      const firstDateOfThisWeek = today.startOf("week");
+      const lastDateOfThisWeek = today.endOf("week");
+
+      this.getLeituras(this.hortaAtual.id).then((dados) => {
+        const leituras = dados.map((sens) => sens.Leitura);
+        const dadosFinal = _.flattenDeep(leituras).filter((leitura) => {
+          const readedAt = DateTime.fromISO(leitura.readed_at);
+          return (
+            readedAt >= firstDateOfThisWeek && readedAt <= lastDateOfThisWeek
+          );
+        });
+
+        const result = [];
+
+        for (const dayOfWeek in this.leituraSemanal.headers) {
+          let count = 0; // Total que será adicionaro ao array `result`
+          let amount = 0; // Contagem da quantidade de dados para cálculo da média
+
+          for (const leitura of dadosFinal) {
+            const datesDayOfWeek =
+              DateTime.fromISO(leitura.readed_at).weekday - 1;
+            if (datesDayOfWeek !== dayOfWeek) continue;
+
+            count += leitura.soil_humidity;
+            amount++;
+          }
+
+          if (amount === 0 || count === 0) {
+            result.push(0);
+            continue;
+          }
+
+          const mean = count / amount;
+          result.push(mean.toFixed(1));
+        }
+
+        this.leituraSemanal.dados = [...result];
+      });
+    },
+
     ...mapActions({
       getLeituras: "horta/getLeiturasHorta",
     }),
