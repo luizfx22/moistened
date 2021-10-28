@@ -45,6 +45,7 @@ export default {
 			return this.$snacks.error("Ocorreu um erro ao sincronizar os dados!", error);
 		}
 
-		store.commit("SET_HORTA_SENSORES", data);
+		return [...data]
+		// store.commit("SET_HORTA_SENSORES", data);
 	}
 };
