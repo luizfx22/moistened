@@ -38,12 +38,13 @@ export default {
 	},
 
 	async getLeiturasHorta(store, horta_id) {
-		const select = `
-			*,
-			Leitura (
-				sensor_id
-			)
-		`;
-		const {data: horta} = await this.$supabase.from("Sensor").select(select.trim()).eq("horta_id", horta_id)
+		const select = `id, sensor_mac, Leitura ( sensor_id, * )`;
+		const {data, error} = await this.$supabase.from("Sensor").select(select).eq("horta_id", horta_id);
+
+		if (error) {
+			return this.$snacks.error("Ocorreu um erro ao sincronizar os dados!", error);
+		}
+
+		store.commit("SET_HORTA_SENSORES", data);
 	}
 };
