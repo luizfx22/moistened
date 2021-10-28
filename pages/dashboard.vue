@@ -3,12 +3,16 @@
 		<v-row>
 			<v-col lg="6" cols="12">
 				<e-charts :options="dadosHoje" width="100%">
-					<template #title> <b>Diário</b> </template>
+					<template #title>
+						<b>Hoje ({{ leituraDiaria.periodo }})</b>
+					</template>
 				</e-charts>
 			</v-col>
 			<v-col lg="6" cols="12">
 				<e-charts :options="dadosSemanal" width="100%">
-					<template #title> <b>Média semanal</b> </template>
+					<template #title>
+						<b>Média semanal ({{ leituraSemanal.periodo }}) </b>
+					</template>
 				</e-charts>
 			</v-col>
 		</v-row>
@@ -91,6 +95,13 @@ export default {
 			// Dados de leitura
 			leituraSemanal: {
 				headers: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+				periodo: "",
+				dados: [],
+			},
+
+			leituraDiaria: {
+				headers: [],
+				periodo: "",
 				dados: [],
 			},
 		};
@@ -114,7 +125,7 @@ export default {
 					},
 				},
 				legend: {
-					data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
+					data: ["Umidade do solo"],
 				},
 				toolbox: {
 					feature: {
@@ -131,7 +142,7 @@ export default {
 					{
 						type: "category",
 						boundaryGap: false,
-						data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+						data: this.leituraDiaria.headers,
 					},
 				],
 				yAxis: [
@@ -141,14 +152,14 @@ export default {
 				],
 				series: [
 					{
-						name: "Email",
+						name: "Umidade do solo",
 						type: "line",
 						stack: "Total",
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
 						},
-						data: [120, 132, 101, 134, 90, 230, 210],
+						data: this.leituraDiaria.dados,
 					},
 				],
 			};
@@ -208,63 +219,85 @@ export default {
 	},
 
 	mounted() {
+		this.getDadosDoDia();
 		this.getDadosDaSemana();
+
 		this.$store.subscribe((mutation) => {
 			if (mutation.type === "settings/setHortaAtual") {
 				this.getDadosDaSemana();
+				this.getDadosDoDia();
 			}
 		});
 	},
 
 	methods: {
-		getDadosDaSemana() {
-			const today = DateTime.fromJSDate(new Date()).toUTC();
+		getDadosDaSemana(hortaId = this.hortaAtual.id) {
+			const today = DateTime.fromJSDate(new Date()).toLocal("pt-BR");
 			const firstDateOfThisWeek = today.startOf("week");
 			const lastDateOfThisWeek = today.endOf("week");
 
-			console.log(today.toISO(), firstDateOfThisWeek.toISO(), lastDateOfThisWeek.toISO());
+			this.leituraSemanal.periodo = `${firstDateOfThisWeek.toFormat(
+				"dd/MM"
+			)} - ${lastDateOfThisWeek.toFormat("dd/MM")}`;
 
-			this.getLeituras(this.hortaAtual.id).then((dados) => {
-				// this.getLeituras("7616c0ec-5037-4907-b0b2-bef8baff37e7").then((dados) => {
+			this.getLeituras(hortaId).then((dados) => {
+				// this.getLeituras("16900b5b-053c-4ab5-ace6-c15b0561850b").then((dados) => {
 				const leituras = dados.map((sens) => sens.Leitura);
 
-				console.log(leituras);
-
 				const dadosFinal = _.flattenDeep(leituras).filter((leitura) => {
-					const readedAt = DateTime.fromISO(leitura.readed_at);
+					const readedAt = DateTime.fromISO(leitura.readed_at).toLocal("pt-BR");
 					return readedAt >= firstDateOfThisWeek && readedAt <= lastDateOfThisWeek;
 				});
-
-				console.log(dadosFinal);
 
 				const result = [];
 
 				for (const dayOfWeek in this.leituraSemanal.headers) {
-					let count = 0; // Total que será adicionaro ao array `result`
-					let amount = 0; // Contagem da quantidade de dados para cálculo da média
+					const pre = dadosFinal.filter((leitura) => {
+						const readedAt = DateTime.fromISO(leitura.readed_at).toLocal("pt-BR");
+						return readedAt.weekday - 1 === Number(dayOfWeek);
+					});
 
-					for (const leitura of dadosFinal) {
-						const datesDayOfWeek = DateTime.fromISO(leitura.readed_at).weekday - 1;
+					const countTotal = pre.map((leitura) => leitura.soil_humidity).reduce((a, b) => a + b, 0);
 
-						console.log(dayOfWeek, datesDayOfWeek);
+					let countAverage = 0;
 
-						if (datesDayOfWeek !== dayOfWeek) continue;
-
-						count += leitura.soil_humidity;
-						amount++;
+					if (pre.length > 0) {
+						countAverage = countTotal / pre.length;
 					}
 
-					if (amount === 0 || count === 0) {
-						result.push(0);
-						continue;
-					}
-
-					const mean = count / amount;
-					result.push(mean.toFixed(1));
+					result.push(countAverage.toFixed(1));
 				}
 
 				this.leituraSemanal.dados = [...result];
-				console.log(result);
+			});
+		},
+
+		getDadosDoDia(hortaId = this.hortaAtual.id) {
+			const today = DateTime.fromJSDate(new Date()).toLocal("pt-BR");
+			const firstHourOfDay = today.startOf("day");
+			const lastHourOfDay = today.endOf("day");
+
+			this.leituraDiaria.periodo = today.toFormat("dd/MM");
+
+			this.getLeituras(hortaId).then((dados) => {
+				// this.getLeituras("16900b5b-053c-4ab5-ace6-c15b0561850b").then((dados) => {
+				const leituras = dados.map((sens) => sens.Leitura);
+
+				const dadosFinal = _.flattenDeep(leituras).filter((leitura) => {
+					const readedAt = DateTime.fromISO(leitura.readed_at).toLocal("pt-BR");
+					return readedAt >= firstHourOfDay && readedAt <= lastHourOfDay;
+				});
+
+				this.leituraDiaria.headers = dadosFinal.map((leitura) => {
+					const readedAt = DateTime.fromISO(leitura.readed_at);
+					return readedAt.toFormat("HH:mm:ss");
+				});
+				this.leituraDiaria.dados = dadosFinal.map((leitura) => leitura.soil_humidity);
+
+				// for (const leitura of dadosFinal) {
+				// this.leituraDiaria.headers.push(DateTime.fromISO(leitura.readed_at).toFormat("HH:mm:ss"));
+				// this.leituraDiaria.dados.push(leitura.soil_humidity);
+				// }
 			});
 		},
 
