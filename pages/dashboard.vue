@@ -81,8 +81,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { DateTime } from "luxon";
+import luxon from "luxon";
 import _ from "lodash";
+
+const DateTime = new luxon.DateTime();
+DateTime.setLocale("pt-BR");
 
 export default {
   name: "Dashboard",
