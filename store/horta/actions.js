@@ -9,7 +9,6 @@ export default {
 			);
 
 		if (error) {
-			console.error(error);
 			return this.$snacks.error("Ocorreu um erro ao buscar as hortas!");
 		}
 
@@ -37,4 +36,14 @@ export default {
 		this.$snacks.success("Horta cadastrada com sucesso!");
 		return data[0];
 	},
+
+	async getLeiturasHorta(store, horta_id) {
+		const select = `
+			*,
+			Leitura (
+				sensor_id
+			)
+		`;
+		const {data: horta} = await this.$supabase.from("Sensor").select(select.trim()).eq("horta_id", horta_id)
+	}
 };
