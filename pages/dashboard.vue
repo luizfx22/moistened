@@ -210,6 +210,7 @@ export default {
   },
 
   mounted() {
+    this.getDadosDaSemana();
     this.$store.subscribe((mutation) => {
       if (mutation.type === "settings/setHortaAtual") {
         this.getDadosDaSemana();
@@ -223,14 +224,25 @@ export default {
       const firstDateOfThisWeek = today.startOf("week");
       const lastDateOfThisWeek = today.endOf("week");
 
+      console.log(
+        today.toISO(),
+        firstDateOfThisWeek.toISO(),
+        lastDateOfThisWeek.toISO()
+      );
+
       this.getLeituras(this.hortaAtual.id).then((dados) => {
         const leituras = dados.map((sens) => sens.Leitura);
+
+        console.log(leituras);
+
         const dadosFinal = _.flattenDeep(leituras).filter((leitura) => {
           const readedAt = DateTime.fromISO(leitura.readed_at);
           return (
             readedAt >= firstDateOfThisWeek && readedAt <= lastDateOfThisWeek
           );
         });
+
+        console.log(dadosFinal);
 
         const result = [];
 
@@ -241,6 +253,9 @@ export default {
           for (const leitura of dadosFinal) {
             const datesDayOfWeek =
               DateTime.fromISO(leitura.readed_at).weekday - 1;
+
+            console.log(dayOfWeek, datesDayOfWeek);
+
             if (datesDayOfWeek !== dayOfWeek) continue;
 
             count += leitura.soil_humidity;
@@ -257,6 +272,7 @@ export default {
         }
 
         this.leituraSemanal.dados = [...result];
+        console.log(result);
       });
     },
 
