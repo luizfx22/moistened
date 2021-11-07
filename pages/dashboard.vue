@@ -103,6 +103,8 @@ export default {
 				headers: [],
 				periodo: "",
 				dados: [],
+				temperaturaAr: [],
+				umidadeAr: []
 			},
 		};
 	},
@@ -125,7 +127,7 @@ export default {
 					},
 				},
 				legend: {
-					data: ["Umidade do solo"],
+					data: ["Umidade do solo", "Umidade do ar", "Temperatura do ar"],
 				},
 				toolbox: {
 					feature: {
@@ -160,6 +162,26 @@ export default {
 							focus: "series",
 						},
 						data: this.leituraDiaria.dados,
+					},
+					{
+						name: "Umidade do ar",
+						type: "line",
+						stack: "Total",
+						areaStyle: {},
+						emphasis: {
+							focus: "series",
+						},
+						data: this.leituraDiaria.umidadeAr,
+					},
+					{
+						name: "Temperatura do ar (ºC)",
+						type: "line",
+						stack: "Total",
+						areaStyle: {},
+						emphasis: {
+							focus: "series",
+						},
+						data: this.leituraDiaria.temperaturaAr,
 					},
 				],
 			};
@@ -221,6 +243,11 @@ export default {
 	mounted() {
 		this.getDadosDoDia();
 		this.getDadosDaSemana();
+
+		this.$supabase.from('Leitura').on('INSERT', () => {
+			this.getDadosDoDia();
+			this.getDadosDaSemana();
+		}).subscribe()
 
 		this.$store.subscribe((mutation) => {
 			if (mutation.type === "settings/setHortaAtual") {
@@ -289,10 +316,13 @@ export default {
 				});
 
 				this.leituraDiaria.headers = dadosFinal.map((leitura) => {
-					const readedAt = DateTime.fromISO(leitura.readed_at);
+					const readedAt = DateTime.fromISO(leitura.readed_at, {zone: 'America/Sao_Paulo'});
 					return readedAt.toFormat("HH:mm:ss");
 				});
+
 				this.leituraDiaria.dados = dadosFinal.map((leitura) => leitura.soil_humidity);
+				this.leituraDiaria.temperaturaAr = dadosFinal.map((leitura) => leitura.air_temperature);
+				this.leituraDiaria.umidadeAr = dadosFinal.map((leitura) => leitura.air_humidity);
 
 				// for (const leitura of dadosFinal) {
 				// this.leituraDiaria.headers.push(DateTime.fromISO(leitura.readed_at).toFormat("HH:mm:ss"));
