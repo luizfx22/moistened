@@ -173,6 +173,7 @@ export default {
 						name: "Umidade do solo",
 						type: "line",
 						yAxisIndex: 1,
+						areaStyle: {},
 						emphasis: {
 							focus: "series",
 						},
@@ -183,6 +184,7 @@ export default {
 						type: "line",
 						yAxisIndex: 1,
 						// type: "bar",
+						areaStyle: {},
 						emphasis: {
 							focus: "series",
 						},
@@ -193,6 +195,7 @@ export default {
 						type: "line",
 						yAxisIndex: 1,
 						// type: "bar",
+						areaStyle: {},
 						emphasis: {
 							focus: "series",
 						},
@@ -245,6 +248,7 @@ export default {
 						name: "Umidade do solo",
 						type: "line",
 						stack: "Total",
+						yAxisIndex: 1,
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
