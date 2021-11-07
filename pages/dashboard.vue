@@ -151,28 +151,12 @@ export default {
 					{
 						type: "value",
 					},
-					// {
-					// 	type: 'value',
-					// 	name: 'Umidade do ar',
-					// 	axisLabel: {
-					// 		formatter: '{value} %'
-					// 	}
-					// },
-					// {
-					// 	type: 'value',
-					// 	name: 'Temperatura do ar',
-					// 	min: 0,
-					// 	interval: 5,
-					// 	axisLabel: {
-					// 		formatter: '{value} °C'
-					// 	}
-					// }
 				],
 				series: [
 					{
 						name: "Umidade do solo",
 						type: "line",
-						yAxisIndex: 1,
+						stack: "Total",
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
@@ -182,8 +166,7 @@ export default {
 					{
 						name: "Umidade do ar (%)",
 						type: "line",
-						yAxisIndex: 1,
-						// type: "bar",
+						stack: "Total",
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
@@ -193,8 +176,7 @@ export default {
 					{
 						name: "Temperatura do ar (ºC)",
 						type: "line",
-						yAxisIndex: 1,
-						// type: "bar",
+						stack: "Total",
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
@@ -240,15 +222,13 @@ export default {
 				yAxis: [
 					{
 						type: "value",
-						name: 'Umidade do solo',
-					}
+					},
 				],
 				series: [
 					{
 						name: "Umidade do solo",
 						type: "line",
 						stack: "Total",
-						yAxisIndex: 1,
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
@@ -261,10 +241,10 @@ export default {
 	},
 
 	created() {
-		// this.$supabase.from('Leitura').on('INSERT', () => {
-		// 	this.getDadosDoDia();
-		// 	this.getDadosDaSemana();
-		// }).subscribe();
+		this.$supabase.from('Leitura').on('INSERT', () => {
+			this.getDadosDoDia();
+			this.getDadosDaSemana();
+		}).subscribe();
 	},
 
 	mounted() {
