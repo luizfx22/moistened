@@ -158,6 +158,7 @@ export default {
 						type: "line",
 						stack: "Total",
 						areaStyle: {},
+						yAxisIndex: 1,
 						emphasis: {
 							focus: "series",
 						},
@@ -165,8 +166,7 @@ export default {
 					},
 					{
 						name: "Umidade do ar (%)",
-						type: "line",
-						stack: "Total",
+						type: "bar",
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
@@ -175,8 +175,7 @@ export default {
 					},
 					{
 						name: "Temperatura do ar (ºC)",
-						type: "line",
-						stack: "Total",
+						type: "bar",
 						areaStyle: {},
 						emphasis: {
 							focus: "series",
