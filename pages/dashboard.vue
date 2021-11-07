@@ -127,7 +127,7 @@ export default {
 					},
 				},
 				legend: {
-					data: ["Umidade do solo", "Umidade do ar", "Temperatura do ar"],
+					data: ["Umidade do solo", "Umidade do ar (%)", "Temperatura do ar (ºC)"],
 				},
 				toolbox: {
 					feature: {
@@ -164,7 +164,7 @@ export default {
 						data: this.leituraDiaria.dados,
 					},
 					{
-						name: "Umidade do ar",
+						name: "Umidade do ar (%)",
 						type: "line",
 						stack: "Total",
 						areaStyle: {},
@@ -240,14 +240,16 @@ export default {
 		},
 	},
 
-	mounted() {
-		this.getDadosDoDia();
-		this.getDadosDaSemana();
-
+	created() {
 		this.$supabase.from('Leitura').on('INSERT', () => {
 			this.getDadosDoDia();
 			this.getDadosDaSemana();
-		}).subscribe()
+		}).subscribe();
+	},
+
+	mounted() {
+		this.getDadosDoDia();
+		this.getDadosDaSemana();
 
 		this.$store.subscribe((mutation) => {
 			if (mutation.type === "settings/setHortaAtual") {
@@ -316,7 +318,7 @@ export default {
 				});
 
 				this.leituraDiaria.headers = dadosFinal.map((leitura) => {
-					const readedAt = DateTime.fromISO(leitura.readed_at, {zone: 'America/Sao_Paulo'});
+					const readedAt = DateTime.fromISO(leitura.readed_at, {zone: 'gmt-3'});
 					return readedAt.toFormat("HH:mm:ss");
 				});
 
