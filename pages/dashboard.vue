@@ -158,7 +158,6 @@ export default {
 						type: "line",
 						stack: "Total",
 						areaStyle: {},
-						yAxisIndex: 1,
 						emphasis: {
 							focus: "series",
 						},
