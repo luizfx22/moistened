@@ -150,7 +150,6 @@ export default {
 				yAxis: [
 					{
 						type: "value",
-						name: 'Umidade do solo',
 					},
 					{
 						type: 'value',
