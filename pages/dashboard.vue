@@ -318,7 +318,7 @@ export default {
 				});
 
 				this.leituraDiaria.headers = dadosFinal.map((leitura) => {
-					const readedAt = DateTime.fromISO(leitura.readed_at, {zone: 'gmt-3'});
+					const readedAt = DateTime.fromISO(leitura.readed_at);
 					return readedAt.toFormat("HH:mm:ss");
 				});
 
