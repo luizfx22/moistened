@@ -261,10 +261,10 @@ export default {
 	},
 
 	created() {
-		this.$supabase.from('Leitura').on('INSERT', () => {
-			this.getDadosDoDia();
-			this.getDadosDaSemana();
-		}).subscribe();
+		// this.$supabase.from('Leitura').on('INSERT', () => {
+		// 	this.getDadosDoDia();
+		// 	this.getDadosDaSemana();
+		// }).subscribe();
 	},
 
 	mounted() {
