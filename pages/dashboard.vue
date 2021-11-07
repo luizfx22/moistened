@@ -181,7 +181,7 @@ export default {
 					{
 						name: "Umidade do ar (%)",
 						type: "line",
-						yAxisIndex: 2,
+						yAxisIndex: 1,
 						// type: "bar",
 						emphasis: {
 							focus: "series",
@@ -191,7 +191,7 @@ export default {
 					{
 						name: "Temperatura do ar (ºC)",
 						type: "line",
-						yAxisIndex: 3,
+						yAxisIndex: 1,
 						// type: "bar",
 						emphasis: {
 							focus: "series",
