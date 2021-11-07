@@ -151,23 +151,22 @@ export default {
 					{
 						type: "value",
 					},
-					{
-						type: 'value',
-						name: 'Umidade do ar',
-						axisLabel: {
-							formatter: '{value} %'
-						}
-					},
-					{
-						type: 'value',
-						name: 'Temperatura do ar',
-						min: 0,
-						max: 25,
-						interval: 5,
-						axisLabel: {
-							formatter: '{value} °C'
-						}
-					}
+					// {
+					// 	type: 'value',
+					// 	name: 'Umidade do ar',
+					// 	axisLabel: {
+					// 		formatter: '{value} %'
+					// 	}
+					// },
+					// {
+					// 	type: 'value',
+					// 	name: 'Temperatura do ar',
+					// 	min: 0,
+					// 	interval: 5,
+					// 	axisLabel: {
+					// 		formatter: '{value} °C'
+					// 	}
+					// }
 				],
 				series: [
 					{
@@ -181,7 +180,8 @@ export default {
 					},
 					{
 						name: "Umidade do ar (%)",
-						type: "bar",
+						type: "line",
+						// type: "bar",
 						emphasis: {
 							focus: "series",
 						},
@@ -189,7 +189,8 @@ export default {
 					},
 					{
 						name: "Temperatura do ar (ºC)",
-						type: "bar",
+						type: "line",
+						// type: "bar",
 						emphasis: {
 							focus: "series",
 						},
