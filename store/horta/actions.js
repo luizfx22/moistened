@@ -52,4 +52,23 @@ export default {
 		return [...data];
 		// store.commit("SET_HORTA_SENSORES", data);
 	},
+
+	async editarHorta(store, form) {
+		const { error } = await this.$supabase.from("Horta").update(form).eq("id", form.id);
+
+		if (error) {
+			return this.$snacks.error("Ocorreu um erro ao atualizar a horta!", error);
+		}
+
+		const { data } = await this.$supabase
+			.from("Horta")
+			.select("*")
+			.eq(
+				"proprietario_id",
+				this.$supabase.auth.user()?.id || "95c51428-9666-42e9-8f38-05840b8d756e"
+			);
+
+		store.commit("SET_HORTAS", data);
+		this.$snacks.success("Horta atualizada com sucesso!");
+	},
 };
