@@ -103,6 +103,8 @@ export default {
 				headers: [],
 				periodo: "",
 				dados: [],
+				temperaturaAr: [],
+				umidadeAr: [],
 			},
 		};
 	},
@@ -125,7 +127,7 @@ export default {
 					},
 				},
 				legend: {
-					data: ["Umidade do solo"],
+					data: ["Umidade do solo", "Umidade do ar (%)", "Temperatura do ar (ºC)"],
 				},
 				toolbox: {
 					feature: {
@@ -160,6 +162,26 @@ export default {
 							focus: "series",
 						},
 						data: this.leituraDiaria.dados,
+					},
+					{
+						name: "Umidade do ar (%)",
+						type: "line",
+						stack: "Total",
+						areaStyle: {},
+						emphasis: {
+							focus: "series",
+						},
+						data: this.leituraDiaria.umidadeAr,
+					},
+					{
+						name: "Temperatura do ar (ºC)",
+						type: "line",
+						stack: "Total",
+						areaStyle: {},
+						emphasis: {
+							focus: "series",
+						},
+						data: this.leituraDiaria.temperaturaAr,
 					},
 				],
 			};
@@ -216,6 +238,16 @@ export default {
 				],
 			};
 		},
+	},
+
+	created() {
+		this.$supabase
+			.from("Leitura")
+			.on("INSERT", () => {
+				this.getDadosDoDia();
+				this.getDadosDaSemana();
+			})
+			.subscribe();
 	},
 
 	mounted() {
