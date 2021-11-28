@@ -103,12 +103,6 @@ export default {
 				headers: [],
 				periodo: "",
 				dados: [],
-				temperaturaAr: [],
-<<<<<<< HEAD
-				umidadeAr: [],
-=======
-				umidadeAr: []
->>>>>>> af33e31c0d14442849d63ae8129b197cfedfe60c
 			},
 		};
 	},
@@ -131,7 +125,7 @@ export default {
 					},
 				},
 				legend: {
-					data: ["Umidade do solo", "Umidade do ar (%)", "Temperatura do ar (ºC)"],
+					data: ["Umidade do solo"],
 				},
 				toolbox: {
 					feature: {
@@ -166,26 +160,6 @@ export default {
 							focus: "series",
 						},
 						data: this.leituraDiaria.dados,
-					},
-					{
-						name: "Umidade do ar (%)",
-						type: "line",
-						stack: "Total",
-						areaStyle: {},
-						emphasis: {
-							focus: "series",
-						},
-						data: this.leituraDiaria.umidadeAr,
-					},
-					{
-						name: "Temperatura do ar (ºC)",
-						type: "line",
-						stack: "Total",
-						areaStyle: {},
-						emphasis: {
-							focus: "series",
-						},
-						data: this.leituraDiaria.temperaturaAr,
 					},
 				],
 			};
@@ -245,7 +219,6 @@ export default {
 	},
 
 	created() {
-<<<<<<< HEAD
 		this.$supabase
 			.from("Leitura")
 			.on("INSERT", () => {
@@ -253,12 +226,6 @@ export default {
 				this.getDadosDaSemana();
 			})
 			.subscribe();
-=======
-		this.$supabase.from('Leitura').on('INSERT', () => {
-			this.getDadosDoDia();
-			this.getDadosDaSemana();
-		}).subscribe();
->>>>>>> af33e31c0d14442849d63ae8129b197cfedfe60c
 	},
 
 	mounted() {
