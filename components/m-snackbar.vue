@@ -8,6 +8,7 @@
 		:centered="positioning.center"
 		:color="snackOptions.color"
 		:timeout="snackOptions.timeout"
+		transition="scroll-y-reverse-transition"
 	>
 		<div class="d-flex flex-row justify-start gap-9">
 			<v-avatar

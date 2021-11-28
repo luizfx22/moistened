@@ -292,12 +292,8 @@ export default {
 					const readedAt = DateTime.fromISO(leitura.readed_at);
 					return readedAt.toFormat("HH:mm:ss");
 				});
-				this.leituraDiaria.dados = dadosFinal.map((leitura) => leitura.soil_humidity);
 
-				// for (const leitura of dadosFinal) {
-				// this.leituraDiaria.headers.push(DateTime.fromISO(leitura.readed_at).toFormat("HH:mm:ss"));
-				// this.leituraDiaria.dados.push(leitura.soil_humidity);
-				// }
+				this.leituraDiaria.dados = dadosFinal.map((leitura) => leitura.soil_humidity);
 			});
 		},
 

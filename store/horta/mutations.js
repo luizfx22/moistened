@@ -11,6 +11,6 @@ export default {
 
 	SET_HORTA_SENSORES(state, sensores) {
 		if (!Array.isArray(sensores)) throw new TypeError("Sensores must be an array");
-		state.horta.sensores = [...sensores]
-	}
+		state.horta.sensores = [...sensores];
+	},
 };

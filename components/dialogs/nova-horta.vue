@@ -31,7 +31,7 @@
 						</v-col>
 					</v-row>
 					<v-row dense>
-						<v-col lg="3">
+						<v-col sm="4" lg="3" cols="12">
 							<v-text-field
 								v-model="form.localizacao.cep"
 								v-mask="'#####-###'"
@@ -43,7 +43,7 @@
 								:loading="loadingCep"
 							></v-text-field>
 						</v-col>
-						<v-col lg="7">
+						<v-col sm="8" lg="7" cols="12">
 							<v-text-field
 								v-model="form.localizacao.logradouro"
 								label="Logradouro"
@@ -52,7 +52,7 @@
 								:rules="rules.logradouro"
 							></v-text-field>
 						</v-col>
-						<v-col lg="2">
+						<v-col sm="4" lg="2" cols="12">
 							<v-text-field
 								ref="numeroField"
 								v-model="form.localizacao.numero"
@@ -62,14 +62,7 @@
 								maxlength="6"
 							></v-text-field>
 						</v-col>
-						<v-col lg="4">
-							<v-text-field
-								v-model="form.localizacao.complemento"
-								required
-								label="Complemento"
-							></v-text-field>
-						</v-col>
-						<v-col lg="8">
+						<v-col sm="8" lg="8" cols="12">
 							<v-text-field
 								v-model="form.localizacao.bairro"
 								:rules="rules.bairro"
@@ -78,7 +71,14 @@
 								readonly
 							></v-text-field>
 						</v-col>
-						<v-col lg="10">
+						<v-col sm="4" lg="4" cols="12">
+							<v-text-field
+								v-model="form.localizacao.complemento"
+								required
+								label="Complemento"
+							></v-text-field>
+						</v-col>
+						<v-col sm="6" lg="10" cols="12">
 							<v-text-field
 								v-model="form.localizacao.cidade"
 								required
@@ -87,7 +87,7 @@
 								readonly
 							></v-text-field>
 						</v-col>
-						<v-col lg="2">
+						<v-col sm="2" lg="2" cols="12">
 							<v-text-field
 								v-model="form.localizacao.uf"
 								required
