@@ -21,5 +21,6 @@ module.exports = {
 	rules: {
 		"prettier/prettier": "error",
 		"no-console": "off",
+		"vue/valid-v-slot": ["error", { allowModifiers: true }],
 	},
 };

@@ -5,5 +5,5 @@ export default {
 
 	sensores(state) {
 		return state.horta.sensores;
-	}
+	},
 };

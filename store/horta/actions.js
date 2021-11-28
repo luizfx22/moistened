@@ -14,6 +14,7 @@ export default {
 		}
 
 		store.commit("SET_HORTAS", [...data]);
+		return true;
 	},
 
 	async gravarHorta(store, form) {
@@ -70,5 +71,34 @@ export default {
 
 		store.commit("SET_HORTAS", data);
 		this.$snacks.success("Horta atualizada com sucesso!");
+	},
+
+	async vincularSensor(store, form) {
+		const { data, error: sError } = await this.$supabase
+			.from("Sensor")
+			.select("id")
+			.eq("codigo_vinculacao", form.codigo_vinculacao);
+
+		if (sError) {
+			this.$snacks.error("Ocorreu um erro ao vincular o sensor!", sError);
+			throw new Error("Ocorreu um erro ao buscar o sensor!");
+		}
+
+		if (data.length < 1) {
+			this.$snacks.error("Sensor não encontrado! Código de vinculação está incorreto!");
+			throw new RangeError("Ocorreu um erro ao vincular o sensor!");
+		}
+
+		const { error } = await this.$supabase
+			.from("Sensor")
+			.update({ horta_id: form.horta_id })
+			.eq("codigo_vinculacao", form.codigo_vinculacao);
+
+		if (error) {
+			this.$snacks.error("Ocorreu um erro ao vincular o sensor!", error);
+			throw new RangeError("Ocorreu um erro ao vincular o sensor!");
+		}
+
+		return this.$snacks.success("Sensor vinculado com sucesso!");
 	},
 };

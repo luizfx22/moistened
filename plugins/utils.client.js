@@ -44,4 +44,42 @@ Vue.prototype.$utils = {
 		if (mediumPassword.test(string)) return 1;
 		return 0;
 	},
+
+	formatEndereco: (
+		enderecoObject,
+		options = { numero: null, condominio: null, apto: null, andar: null, complemento: null }
+	) => {
+		const { numero, condominio, apto, andar, complemento } = options;
+
+		if (typeof enderecoObject !== "object") throw new TypeError("enderecoObject must be an object");
+		let str = "";
+
+		/**
+		 *
+		 * Av. Alameda das Travessas, 111, Edif. Bosque do Cerrado, ap. 2222 - Bairro dos Barris. Salvador/Bahia. CEP: 40000-000.
+		 */
+
+		str += `${enderecoObject.logradouro}`;
+
+		if (numero) {
+			str += ", ";
+			str += `Nº ${numero}`;
+		}
+
+		if (complemento) {
+			str += ` ${complemento}`;
+		}
+
+		if (condominio && apto) {
+			str += `, ${condominio.nome}, ap. ${apto} - ${andar}º andar`;
+		}
+
+		str += " - ";
+		str += `${enderecoObject.bairro}. `;
+		str += `${enderecoObject.cidade}-${enderecoObject.uf}.`;
+		str += " ";
+		str += `CEP: ${enderecoObject.cep}`;
+
+		return str;
+	},
 };

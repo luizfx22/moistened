@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+import portuguese from "vuetify/es5/locale/pt";
 
 export default {
 	ssr: false,
@@ -98,6 +99,12 @@ export default {
 					success: colors.lightGreen.darken2,
 				},
 			},
+		},
+		lang: {
+			locales: {
+				portuguese,
+			},
+			current: "portuguese",
 		},
 	},
 

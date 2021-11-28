@@ -17,6 +17,7 @@
 							<v-text-field
 								v-model="form.codigo_vinculacao"
 								v-mask="'#######'"
+								class="text-center"
 								counter="7"
 								maxlength="7"
 								required
@@ -42,8 +43,6 @@
 <script>
 import { mapActions } from "vuex";
 
-const capitalize = ([initial, ...rest]) => [initial.toUpperCase(), ...rest].join("");
-
 export default {
 	data() {
 		return {
@@ -54,6 +53,7 @@ export default {
 			form: {
 				valid: true,
 				codigo_vinculacao: "",
+				horta_id: "",
 			},
 		};
 	},
@@ -65,7 +65,7 @@ export default {
 					(v) => {
 						if (!v) return "O código é obrigatório";
 						if (v.length > 75) return "O código deve ter no máximo 7 caracteres";
-						if (v?.trim() === "") return "O código não pode ser vazia";
+						if (v?.trim() === "") return "O código não pode ser vazio";
 						if (!/^[0-9]+$/.test(v)) return "O código deve conter apenas números";
 						return true;
 					},
@@ -83,9 +83,10 @@ export default {
 	},
 
 	methods: {
-		open() {
+		open(hortaId) {
 			if (!this.dialog) {
 				this.dialog = true;
+				this.form.horta_id = hortaId;
 				return true;
 			}
 			this.dialog = false;
@@ -96,17 +97,22 @@ export default {
 			this.$refs.form.validate();
 			if (!this.form.valid) return false;
 
-			this.form.descricao = capitalize(this.form.descricao);
-
 			this.loading = true;
-			this.gravarHorta({ ...this.form }).then((res) => {
-				this.dialog = false;
-				this.loading = false;
-			});
+			this.vincularSensor({ ...this.form })
+				.then((res) => {
+					this.getLeiturasHorta().then(() => {
+						this.dialog = false;
+						this.loading = false;
+					});
+				})
+				.catch(() => {
+					this.loading = false;
+				});
 		},
 
 		...mapActions({
-			gravarHorta: "horta/gravarHorta",
+			getLeiturasHorta: "horta/getLeiturasHorta",
+			vincularSensor: "horta/vincularSensor",
 		}),
 	},
 };

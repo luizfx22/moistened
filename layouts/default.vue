@@ -104,7 +104,7 @@
 
 				<v-tooltip right>
 					<template #activator="{ on, attrs }">
-						<v-list-item link class="mt-2" v-bind="attrs" v-on="on">
+						<v-list-item link class="mt-2" v-bind="attrs" nuxt to="/manage/hortas" v-on="on">
 							<v-list-item-icon>
 								<v-icon>mdi-store-outline</v-icon>
 							</v-list-item-icon>
