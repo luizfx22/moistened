@@ -104,7 +104,11 @@ export default {
 				periodo: "",
 				dados: [],
 				temperaturaAr: [],
+<<<<<<< HEAD
 				umidadeAr: [],
+=======
+				umidadeAr: []
+>>>>>>> af33e31c0d14442849d63ae8129b197cfedfe60c
 			},
 		};
 	},
@@ -241,6 +245,7 @@ export default {
 	},
 
 	created() {
+<<<<<<< HEAD
 		this.$supabase
 			.from("Leitura")
 			.on("INSERT", () => {
@@ -248,6 +253,12 @@ export default {
 				this.getDadosDaSemana();
 			})
 			.subscribe();
+=======
+		this.$supabase.from('Leitura').on('INSERT', () => {
+			this.getDadosDoDia();
+			this.getDadosDaSemana();
+		}).subscribe();
+>>>>>>> af33e31c0d14442849d63ae8129b197cfedfe60c
 	},
 
 	mounted() {
