@@ -34,7 +34,7 @@ export default {
 			return this.$snacks.error("Ocorreu um erro!", error);
 		}
 
-		store.commit("ADD_HORTA", data[0]);
+		store.commit("ADD_HORTAS", data[0]);
 		this.$snacks.success("Horta cadastrada com sucesso!");
 		return data[0];
 	},

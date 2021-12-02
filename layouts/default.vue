@@ -193,7 +193,7 @@ export default {
 
 	created() {
 		this.$store.subscribe((mutation, state) => {
-			if (mutation.type === "horta/ADD_HORTA") {
+			if (mutation.type === "horta/ADD_HORTAS") {
 				this.getHortas();
 			}
 		});
