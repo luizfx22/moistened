@@ -21,7 +21,9 @@
 				<v-list>
 					<v-list-item v-for="(i, o) in hortasDisponiveis" :key="o" @click="trocaHortaContexto(i)">
 						<v-list-item-title>{{ i.descricao }}</v-list-item-title>
-						<div v-if="o === 0" style="display: hidden">{{ trocaHortaContexto(i) }}</div>
+						<div v-if="o === 0 && hortasDisponiveis.length === 1" style="display: hidden">
+							{{ trocaHortaContexto(i) }}
+						</div>
 					</v-list-item>
 				</v-list>
 			</v-menu>
