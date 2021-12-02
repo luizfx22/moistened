@@ -10,7 +10,12 @@
 									<h3>Desconectando. Aguarde...</h3>
 								</v-col>
 								<v-col cols="12">
-									<v-progress-linear color="teal darken-2" indeterminate rounded height="7"></v-progress-linear>
+									<v-progress-linear
+										color="teal darken-2"
+										indeterminate
+										rounded
+										height="7"
+									></v-progress-linear>
 								</v-col>
 							</v-row>
 						</v-card-actions>
@@ -22,10 +27,15 @@
 </template>
 <script>
 export default {
-	middleware: "auth",
 	layout: "empty",
+	middleware: "auth",
 	created() {
-		this.$supabase.auth.signOut()
+		this.$supabase.auth.signOut();
+
+		if (window.localStorage.getItem("moistened")) {
+			window.localStorage.removeItem("moistened");
+		}
+
 		this.$router.push("/auth/login");
 	},
 };

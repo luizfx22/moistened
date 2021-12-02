@@ -22,5 +22,6 @@ module.exports = {
 		"prettier/prettier": "error",
 		"no-console": "off",
 		"vue/valid-v-slot": ["error", { allowModifiers: true }],
+		"nuxt/no-globals-in-created": "off",
 	},
 };
