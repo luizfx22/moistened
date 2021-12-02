@@ -113,7 +113,7 @@
 	</v-dialog>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 const capitalize = ([initial, ...rest]) => [initial.toUpperCase(), ...rest].join("");
 
@@ -207,6 +207,7 @@ export default {
 
 			this.loading = true;
 			this.gravarHorta({ ...this.form }).then((res) => {
+				this.setHortaAtual(res.data?.id);
 				this.dialog = false;
 				this.loading = false;
 			});
@@ -214,6 +215,10 @@ export default {
 
 		...mapActions({
 			gravarHorta: "horta/gravarHorta",
+		}),
+
+		...mapMutations({
+			setHortaAtual: "settings/setHortaAtual",
 		}),
 	},
 };

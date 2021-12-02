@@ -241,7 +241,9 @@ export default {
 	},
 
 	methods: {
-		getDadosDaSemana(hortaId = this.hortaAtual.id) {
+		getDadosDaSemana(hortaId = this?.hortaAtual?.id || null) {
+			if (!hortaId) return;
+
 			const today = DateTime.fromJSDate(new Date()).toLocal("pt-BR");
 			const firstDateOfThisWeek = today.startOf("week");
 			const lastDateOfThisWeek = today.endOf("week");
@@ -282,7 +284,9 @@ export default {
 			});
 		},
 
-		getDadosDoDia(hortaId = this.hortaAtual.id) {
+		getDadosDoDia(hortaId = this?.hortaAtual?.id || null) {
+			if (!hortaId) return;
+
 			const today = DateTime.fromJSDate(new Date()).toLocal("pt-BR");
 			const firstHourOfDay = today.startOf("day");
 			const lastHourOfDay = today.endOf("day");
