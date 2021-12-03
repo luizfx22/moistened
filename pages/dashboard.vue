@@ -61,13 +61,14 @@
 			<v-tooltip left>
 				<template #activator="{ on, attrs }">
 					<v-btn
+						v-if="hortaAtual && hortaAtual.id"
 						v-bind="attrs"
 						fab
 						dark
 						small
 						color="pink darken-3"
 						v-on="on"
-						@click="$refs.dialogVincularSensor.open"
+						@click="$refs.dialogVincularSensor.open(hortaAtual.id)"
 					>
 						<v-icon>mdi-link-variant-plus</v-icon>
 					</v-btn>
