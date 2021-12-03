@@ -100,7 +100,7 @@ export default {
 			this.loading = true;
 			this.vincularSensor({ ...this.form })
 				.then((res) => {
-					this.getLeiturasHorta().then(() => {
+					this.getLeiturasHorta(this.form.horta_id).then(() => {
 						this.dialog = false;
 						this.loading = false;
 					});
